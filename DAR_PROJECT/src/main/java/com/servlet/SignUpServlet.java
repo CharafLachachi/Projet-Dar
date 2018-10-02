@@ -25,6 +25,7 @@ public class SignUpServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		signUpService = new SignUpService();
+		
 	}
 
 	/**
@@ -44,6 +45,7 @@ public class SignUpServlet extends HttpServlet {
 				request.getParameter("lastname"),
 				request.getParameter("email"), 
 				request.getParameter("password"));
+		created_abonne_response_json.addProperty("message", 200);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=utf-8");
 		response.getWriter().print(created_abonne_response_json);
