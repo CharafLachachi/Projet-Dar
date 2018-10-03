@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 
 /**
+ * @author Lachachi charaf
+ *
+ */
+/**
  * @author Usuario
  *
  */
@@ -108,6 +112,14 @@ public class Abonne {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Abonne [username=" + username + ", email=" + email + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", gender=" + gender + ", adress=" + adress + ", description=" + description
+				+ ", password=" + password + "]";
 	}
 	
 	

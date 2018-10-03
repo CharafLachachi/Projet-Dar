@@ -15,6 +15,9 @@ public abstract class AbonneDAO {
 	public static void addAbonne(Abonne abonne) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
+		if (!session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
 		session.beginTransaction();
 		try {
 			session.save(abonne);

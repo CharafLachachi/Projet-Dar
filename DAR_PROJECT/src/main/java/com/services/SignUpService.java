@@ -16,10 +16,11 @@ public class SignUpService {
 			abonne.setLastname(lastname);
 			abonne.setEmail(email);
 			abonne.setPassword(password);
-			AbonneDAO.addAbonne(abonne);
 			
+			//AbonneDAO.addAbonne(abonne);
+			System.out.println("**************************************************"+abonne.toString());
 			abonne_json = new JsonObject();
-			abonne_json.addProperty("id_abonne", abonne.getABONNE_id());
+			//abonne_json.addProperty("id_abonne", abonne.getABONNE_id());
 			abonne_json.addProperty("message", 200);
 			return abonne_json;
 //		}
