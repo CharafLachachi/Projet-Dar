@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 public class SignService {
 	public JsonObject createAbonne(String username, String firstname, String lastname, String email,String password ) {
 		JsonObject abonne_json = null;
-		Abonne existedUsername_Abonne = AbonneDAO.getAbonneByUserName(username);
+		Abonne existedUsername_Abonne = AbonneDAO.getAbonneByUserName(email);
 		if (existedUsername_Abonne == null) {
 			 //TODO change with constructor later
 			Abonne abonne = new Abonne();
