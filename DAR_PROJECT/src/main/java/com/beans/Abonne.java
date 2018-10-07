@@ -1,5 +1,6 @@
 package com.beans;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,10 @@ import javax.persistence.*;
 
 /**
  * @author Lachachi charaf
+ *
+ */
+/**
+ * @author Usuario
  *
  */
 /**
@@ -45,7 +50,7 @@ public class Abonne {
 	 * Association avec les villes
 	 */
 	@ManyToMany
-	@JoinTable(name="AbonneCities",
+	@JoinTable(name="Abonne_Cities",
 	joinColumns=@JoinColumn(
 			name="id_abo",
 			referencedColumnName="ABONNE_ID"),
@@ -91,6 +96,7 @@ public class Abonne {
 
 	public Abonne() {
 		this.comments = new ArrayList<Commentaire>();
+		this.cities = new HashSet<CitiesOfInterest>();
 	}
 
 
@@ -176,6 +182,26 @@ public class Abonne {
 		return "Abonne [username=" + username + ", email=" + email + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", gender=" + gender + ", adress=" + adress + ", description=" + description
 				+ ", password=" + password + "]";
+	}
+
+	public Set<CitiesOfInterest> getCities() {
+		return cities;
+	}
+
+	public void setCities(Set<CitiesOfInterest> cities) {
+		this.cities = cities;
+	}
+
+	public Set<Publication> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(Set<Publication> publications) {
+		this.publications = publications;
+	}
+
+	public void setComments(List<Commentaire> comments) {
+		this.comments = comments;
 	}
 
 

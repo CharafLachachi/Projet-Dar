@@ -70,7 +70,8 @@ public class SignUpServlet extends HttpServlet {
 				SignUpObject.getFirstname(),
 				SignUpObject.getFirstname(), 
 				SignUpObject.getEmail(),
-				SignUpObject.getPassword());
+				SignUpObject.getPassword(),
+				SignUpObject.getCities());
 
 		created_abonne_response_json.addProperty("message", 200);
 		response.setCharacterEncoding("UTF-8");

@@ -1,5 +1,6 @@
 package com.beans;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "CITIESOFINTEREST")
-public class CitiesOfInterest {
+public  class CitiesOfInterest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CITY_ID")
@@ -35,5 +36,47 @@ public class CitiesOfInterest {
 	
 	@ManyToMany(mappedBy="cities")
 	private Set<Abonne> abonnes;
+
+
+
+	public String getCity_name() {
+		return city_name;
+	}
+
+
+
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
+	}
+
+
+
+	public Set<Abonne> getAbonnes() {
+		return abonnes;
+	}
+
+
+
+	public void setAbonnes(Set<Abonne> abonnes) {
+		this.abonnes = abonnes;
+	}
+	
+	public CitiesOfInterest() {
+		abonnes = new HashSet<Abonne>();
+	}
+
+
+
+	public int getCity_id() {
+		return city_id;
+	}
+
+
+
+	public void setCity_id(int city_id) {
+		this.city_id = city_id;
+	}
+	
+	
 	
 }
