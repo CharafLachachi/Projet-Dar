@@ -10,9 +10,14 @@
     <property name="hibernate.connection.password"></property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
     <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.id.new_generator_mappings">false</property>
     <mapping class="com.beans.Abonne" />
+    <mapping class="com.beans.CitiesOfInterest" />
+    <mapping class="com.beans.Publication" />
+    <mapping class="com.beans.Message" />
+    <mapping class="com.beans.Commentaire" />
+    
     </session-factory>
 </hibernate-configuration>

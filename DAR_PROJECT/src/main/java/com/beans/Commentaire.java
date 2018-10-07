@@ -1,13 +1,7 @@
 package com.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 /**
  * 
@@ -15,7 +9,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table (name = "Commentaire")
+@Table (name = "COMMENTAIRE")
 public class Commentaire {
 
 	@Id
@@ -26,7 +20,7 @@ public class Commentaire {
 	@Column(name = "COMMENT_TXT")
 	private int COMMENT_text;
 
-	private Publication publication;
+	
 
 	/** 
 	 * Association avec publication
@@ -35,6 +29,7 @@ public class Commentaire {
 	
 	@ManyToOne
 	@JoinColumn(name="PUB_ID") 
+	private Publication publication;
 	
 	public Publication getPublication() {
 		return publication;
@@ -48,10 +43,10 @@ public class Commentaire {
 	 * Assocition avec Abonne 
 	 * @return
 	 */
-	
-	private Abonne abonne;
 	@ManyToOne
-	@JoinColumn(name="abo_id")
+	@JoinColumn(name="ABONNE_ID")
+	private Abonne abonne;
+	
 	public Abonne getAbonne() {
 		return this.abonne;
 	}

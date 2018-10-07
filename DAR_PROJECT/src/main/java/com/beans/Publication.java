@@ -20,7 +20,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table (name = "Publication")
+@Table (name = "PUBLICATION")
 public class Publication {
 	public Publication() {
 		this.comments = new ArrayList<Commentaire>();
@@ -40,10 +40,9 @@ public class Publication {
 	@ManyToMany(mappedBy="publications")
 	private Set<Abonne> abonnes;
 
-
-	private ArrayList<Commentaire> comments;
-
 	@OneToMany(mappedBy="publication")
+	private List<Commentaire> comments;
+
 	public List<Commentaire> getComments(){
 		return this.comments;
 	}

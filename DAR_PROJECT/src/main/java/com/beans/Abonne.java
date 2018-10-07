@@ -74,8 +74,8 @@ public class Abonne {
 	/**
 	 * Associations avec les commentaires 
 	 */
+	@OneToMany(targetEntity =Commentaire.class,  mappedBy="abonne")
 	private List<Commentaire> comments;
-	@OneToMany(mappedBy="abonne")
 
 	public List<Commentaire> getComments(){
 		return this.comments;
