@@ -1,10 +1,17 @@
 package com.beans;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
+/**
+ * 
+ * @author thamazgha
+ *
+ */
 public class CitiesOfInterest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,5 +29,7 @@ public class CitiesOfInterest {
 	
 	
 	
+	@ManyToMany(mappedBy="cities")
+	private Set<Abonne> abonnes;
 	
 }

@@ -1,4 +1,8 @@
 package com.beans;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
 
 
@@ -34,14 +38,66 @@ public class Abonne {
 	private String description;
 	@Column(name = "PASSWORD")
 	private String password;
-	
-	public Abonne() {}
 
-	
+
+
+	/**
+	 * Association avec les villes
+	 */
+	@ManyToMany
+	@JoinTable(name="AbonneCities",
+	joinColumns=@JoinColumn(
+			name="id_abo",
+			referencedColumnName="ABONNE_ID"),
+	inverseJoinColumns=@JoinColumn(
+			name="id_city",
+			referencedColumnName="CITY_ID"))
+
+	private Set<CitiesOfInterest> cities;
+
+
+	/**
+	 * Association avec les publications
+	 */
+	@ManyToMany
+	@JoinTable(name="AbonnePub",
+	joinColumns=@JoinColumn(
+			name="abo_id",
+			referencedColumnName="ABONNE_ID"),
+	inverseJoinColumns=@JoinColumn(
+			name="pub_id",
+			referencedColumnName="PUB_ID"))
+
+	private Set<CitiesOfInterest> publications;
+
+
+	/**
+	 * Associations avec les commentaires 
+	 */
+	private List<Commentaire> comments;
+	@OneToMany(mappedBy="comment")
+
+	public List<Commentaire> getComments(){
+		return this.comments;
+	}
+
+	public void setComments(ArrayList<Commentaire> comments){
+		this.comments=comments;
+	}
+
+	/**
+	 * Construtor
+	 */
+
+	public Abonne() {
+		this.comments = new ArrayList<Commentaire>();
+	}
+
+
 	/**
 	 * Getters & Setters
 	 * */
-	
+
 	public int getABONNE_id() {
 		return ABONNE_id;
 	}
@@ -121,6 +177,6 @@ public class Abonne {
 				+ lastname + ", gender=" + gender + ", adress=" + adress + ", description=" + description
 				+ ", password=" + password + "]";
 	}
-	
-	
+
+
 }
