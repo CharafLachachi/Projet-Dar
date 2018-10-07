@@ -68,14 +68,14 @@ public class Abonne {
 			name="pub_id",
 			referencedColumnName="PUB_ID"))
 
-	private Set<CitiesOfInterest> publications;
+	private Set<Publication> publications;
 
 
 	/**
 	 * Associations avec les commentaires 
 	 */
 	private List<Commentaire> comments;
-	@OneToMany(mappedBy="comment")
+	@OneToMany(mappedBy="abonne")
 
 	public List<Commentaire> getComments(){
 		return this.comments;
