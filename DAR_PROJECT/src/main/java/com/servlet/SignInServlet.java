@@ -77,7 +77,7 @@ public class SignInServlet extends HttpServlet {
 		Abonne abonne = SignService.loginAbonne(loginObject.getEmail(), loginObject.getPassword());
 
 		JsonObject created_abonne_response_json = new JsonObject();
-
+		System.err.println(abonne);
 		created_abonne_response_json.addProperty("token", getJWT_Token(abonne.getUsername(), abonne.getABONNE_id(),
 				abonne.getFirstname(), abonne.getEmail(), abonne.getLastname()));
 		response.setContentType("application/json;charset=utf-8");
