@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.services.SignService;
+import com.utils.PasrseJsonUtility;
 
 import helpers.models.SignupModel;
 
@@ -51,15 +52,7 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
-		StringBuffer jb = new StringBuffer();
-		String line = null;
-		  try {
-		    BufferedReader reader = request.getReader();
-		    while ((line = reader.readLine()) != null)
-		      jb.append(line);
-		  } catch (Exception e) { /*report an error*/ }
-		  
+		 StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 		  
 		  System.out.println(jb.toString());
 		  
