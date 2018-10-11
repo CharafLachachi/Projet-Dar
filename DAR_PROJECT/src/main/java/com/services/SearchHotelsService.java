@@ -21,7 +21,7 @@ public class SearchHotelsService {
 		 * */
 		
 		LatLng googleGeocode;
-		StringBuffer amadeusResponse;
+		String amadeusResponse;
 		Gson gson = new Gson();
 		
 		// Required format by amadeus api
@@ -37,13 +37,14 @@ public class SearchHotelsService {
 			googleGeocode = GoogleMapApiAccess.
 					getCityGeoCodeByCityName("Paris, France");
 			// Get Hotels results 
-			amadeusResponse = AmadeusHotelsApiAccess.GetResponseFromAPI(AmadeusHotelsApiAccess.getHotels
+			amadeusResponse = AmadeusHotelsApiAccess.getHotelOffers
 					(formatter.format(c.getTime()),
 					formatter.format(c1.getTime()),
 					searchObject.getRadius(), 
 					searchObject.getPrice(),
 					String.valueOf(googleGeocode.lat),
-					String.valueOf(googleGeocode.lng)));
+					String.valueOf(googleGeocode.lng));
+			
 			JsonParser parser = new JsonParser();
 			JsonObject o = parser.parse(amadeusResponse.toString()).getAsJsonObject();
 			return o;
