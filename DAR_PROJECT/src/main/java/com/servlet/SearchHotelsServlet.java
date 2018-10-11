@@ -43,9 +43,9 @@ public class SearchHotelsServlet extends HttpServlet {
 		
 		
 		System.out.println(searchObject.getCities().toString());
-		JsonObject hoteslResponse = searchHotelService.getHotels(searchObject);
+		String hoteslOffersResponse = searchHotelService.getHotels(searchObject);
 		
-		response.getWriter().print(hoteslResponse);
+		response.getWriter().print(hoteslOffersResponse);
 	}
 
 	/**
