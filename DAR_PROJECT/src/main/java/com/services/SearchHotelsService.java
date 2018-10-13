@@ -12,10 +12,13 @@ import com.api.AmadeusHotelsApiAccess;
 import com.api.AmadeusHotelsInformationApiAcess;
 import com.api.GoogleMapApiAccess;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.maps.model.LatLng;
 
-import helpers.models.Address;
+import helpers.models.AddressModel;
+import helpers.models.HotelContactModel;
 import helpers.models.SearchRequestModel;
 import helpers.models.SearchResponseModel;
 
@@ -26,12 +29,12 @@ import helpers.models.SearchResponseModel;
  * 
  * */
 public class SearchHotelsService {
-	
+
 	public String getHotels(SearchRequestModel searchObject) {
 		String checkInDate;
 		String checkOutDate;
 		Calendar calendarIn;
-		Calendar calendarOut;		
+		Calendar calendarOut;
 		LatLng googleGeocode;
 		HotelOffer[] amadeusResponse;
 		Gson gson = new Gson();
@@ -57,22 +60,26 @@ public class SearchHotelsService {
 			List<SearchResponseModel> searchResponseModels = new ArrayList<SearchResponseModel>();
 
 			for (HotelOffer hotelOffer : amadeusResponse) {
-				// Get hotel information from Google API 
-				StringBuffer hotelInfoJson = getHotelInformationsById( hotelOffer.getHotel().getHotelId(), checkInDate, checkOutDate);
-				
+				// Get hotel information from Google API
+				StringBuffer hotelInfoJson = getHotelInformationsById(hotelOffer.getHotel().getHotelId(), checkInDate,
+						checkOutDate);
+
 				// Parse stringbuffer as json object to get informations properties
 				JsonObject jsonObject = gson.fromJson(hotelInfoJson.toString(), JsonObject.class);
 				JsonObject hotelAddress = null;
 				String hotelName = jsonObject.get("property_name").getAsString();
-				if(jsonObject.has("address")) {
-				hotelAddress = jsonObject.get("address").getAsJsonObject();}
-				String hotelContacts = jsonObject.get("contacts").getAsJsonArray().toString().replaceAll("\"", "");
+				if (jsonObject.has("address") == false || hotelName.toLowerCase().contains("Missing")) {
+					continue;
+				}
+				hotelAddress = jsonObject.get("address").getAsJsonObject();
+				JsonArray hotelContacts = jsonObject.get("contacts").getAsJsonArray();
 
 				for (Offer offer : hotelOffer.getOffers()) {
 
-					// Ignore offer if price is empty or null 
-					if (offer.getPrice().getTotal() == null || offer.getPrice().getTotal().isEmpty()) continue;
-				
+					// Ignore offer if price is empty or null
+					if (offer.getPrice().getTotal() == null || offer.getPrice().getTotal().isEmpty())
+						continue;
+
 					// Create response model which will be send to the client
 					SearchResponseModel offerResponse = new SearchResponseModel();
 					offerResponse.setRoomPrice(offer.getPrice().getTotal());
@@ -81,16 +88,43 @@ public class SearchHotelsService {
 					offerResponse.setRadius(searchObject.getRadius());
 					offerResponse.setNbPers(searchObject.getNbPers());
 					offerResponse.setCity(searchObject.getCityName());
-					
-					Address hotelAdr= new Address();
-					if(jsonObject.has("address")) {
-					hotelAdr.setCity(hotelAddress.get("city").getAsString());
-					hotelAdr.setPostal_code(hotelAddress.get("postal_code").getAsString());
-					hotelAdr.setLine1(hotelAddress.get("line1").getAsString());}
+
+					AddressModel hotelAdr = new AddressModel();
+					if (!hotelAddress.get("city").getAsString().isEmpty()
+							&& !hotelAddress.get("postal_code").getAsString().isEmpty()
+							&& !hotelAddress.get("line1").getAsString().isEmpty()) {
+						hotelAdr.setCity(hotelAddress.get("city").getAsString());
+						hotelAdr.setPostal_code(hotelAddress.get("postal_code").getAsString());
+						hotelAdr.setLine1(hotelAddress.get("line1").getAsString());
+					}
 					offerResponse.setAddress(hotelAdr);
 					offerResponse.setHotelName(hotelName);
-					offerResponse.setHotelContacts(hotelContacts);
-					
+
+					HotelContactModel hotelContact = new HotelContactModel();
+					for (JsonElement elemnt : hotelContacts) {
+						JsonObject elementObject = elemnt.getAsJsonObject();
+						if (elementObject.has("type")) {
+							
+							String type = elementObject.get("type").getAsString();
+							switch (type) {
+							case "PHONE":
+								hotelContact.setTel(elementObject.get("detail").getAsString());
+								break;
+							case "URL":
+								hotelContact.setUrl(elementObject.get("detail").getAsString());
+								break;
+							case "EMAIL":
+								hotelContact.setEmail(elementObject.get("detail").getAsString());
+								break;
+							default:
+								break;
+							}
+						}
+					}
+					offerResponse.setHotelContacts(hotelContact);
+
+				
+
 					System.out.println(offerResponse.toString());
 					searchResponseModels.add(offerResponse);
 
@@ -109,7 +143,7 @@ public class SearchHotelsService {
 	private LatLng getCityGeoCodeByName(String cityName) {
 		return GoogleMapApiAccess.getCityGeoCodeByCityName(cityName);
 	}
-	
+
 	private StringBuffer getHotelInformationsById(String hotelId, String checkInDate, String checkOutDate) {
 		try {
 			return AmadeusHotelsInformationApiAcess.GetResponseFromAPI(

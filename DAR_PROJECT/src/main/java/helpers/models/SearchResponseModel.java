@@ -1,17 +1,19 @@
 package helpers.models;
 
+import com.amadeus.resources.HotelOffer.HotelTax;
+
 public class SearchResponseModel {
 	private String roomPrice;
 	private Integer radius;
 	private Integer nbPers;
 	private String chekInDate;
 	private String checkOutDate;
-	private Address address;
+	private AddressModel address;
 	private String weather;
 	private String picture;
 	private String city;
 	private String hotelName;
-	private String hotelContacts;
+	private HotelContactModel hotelContacts;
 	
 	public SearchResponseModel() {}
 
@@ -55,11 +57,11 @@ public class SearchResponseModel {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public Address getAddress() {
+	public AddressModel getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressModel address) {
 		this.address = address;
 	}
 
@@ -95,11 +97,11 @@ public class SearchResponseModel {
 		this.hotelName = hotelName;
 	}
 
-	public String getHotelContacts() {
+	public HotelContactModel getHotelContacts() {
 		return hotelContacts;
 	}
 
-	public void setHotelContacts(String hotelContacts) {
+	public void setHotelContacts(HotelContactModel hotelContacts) {
 		this.hotelContacts = hotelContacts;
 	}
 
