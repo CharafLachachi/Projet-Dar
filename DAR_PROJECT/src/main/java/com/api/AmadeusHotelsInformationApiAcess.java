@@ -26,7 +26,7 @@ public abstract class AmadeusHotelsInformationApiAcess {
 	}
 	
 	public static String getHotelInfoById(String hotelId, String checkInDate, String checkOutDate) {
-		return "https://api.sandbox.amadeus.com/v1.2/hotels/RTCEQIBS"
+		return "https://api.sandbox.amadeus.com/v1.2/hotels/"+hotelId
 				+ "?apikey="+API_KEY
 				+ "&check_in="+checkInDate
 				+ "&check_out="+checkOutDate;

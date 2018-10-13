@@ -1,12 +1,12 @@
 package helpers.models;
 
 public class SearchResponseModel {
-	private String roompPrice;
+	private String roomPrice;
 	private Integer radius;
 	private Integer nbPers;
 	private String chekInDate;
 	private String checkOutDate;
-	private String address;
+	private Address address;
 	private String weather;
 	private String picture;
 	private String city;
@@ -16,11 +16,11 @@ public class SearchResponseModel {
 	public SearchResponseModel() {}
 
 	public String getRoompPrice() {
-		return roompPrice;
+		return roomPrice;
 	}
 
-	public void setRoompPrice(String roompPrice) {
-		this.roompPrice = roompPrice;
+	public void setRoomPrice(String roompPrice) {
+		this.roomPrice = roompPrice;
 	}
 
 	public Integer getRadius() {
@@ -55,11 +55,11 @@ public class SearchResponseModel {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -101,6 +101,14 @@ public class SearchResponseModel {
 
 	public void setHotelContacts(String hotelContacts) {
 		this.hotelContacts = hotelContacts;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchResponseModel [roomPrice=" + roomPrice + ", radius=" + radius + ", nbPers=" + nbPers
+				+ ", chekInDate=" + chekInDate + ", checkOutDate=" + checkOutDate + ", address=" + address
+				+ ", weather=" + weather + ", picture=" + picture + ", city=" + city + ", hotelName=" + hotelName
+				+ ", hotelContacts=" + hotelContacts + "]";
 	}
 
 	

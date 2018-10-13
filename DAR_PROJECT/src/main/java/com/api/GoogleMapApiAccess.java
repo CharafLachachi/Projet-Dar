@@ -16,7 +16,7 @@ public abstract class GoogleMapApiAccess {
 				    .build();
 			
 			GeocodingResult[] results =  GeocodingApi.geocode(context,
-				    "Paris, France").await();
+				    cityName).await();
 				return results[0].geometry.location ;
 		} catch (Exception e) {
 			e.printStackTrace();

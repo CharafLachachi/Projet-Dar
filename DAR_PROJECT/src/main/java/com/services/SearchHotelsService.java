@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.maps.model.LatLng;
 
+import helpers.models.Address;
 import helpers.models.SearchRequestModel;
 import helpers.models.SearchResponseModel;
 
@@ -61,9 +62,11 @@ public class SearchHotelsService {
 				
 				// Parse stringbuffer as json object to get informations properties
 				JsonObject jsonObject = gson.fromJson(hotelInfoJson.toString(), JsonObject.class);
+				JsonObject hotelAddress = null;
 				String hotelName = jsonObject.get("property_name").getAsString();
-				String hotelAddress = jsonObject.get("address").getAsJsonObject().toString();
-				String hotelContacts = jsonObject.get("contacts").getAsJsonArray().toString();
+				if(jsonObject.has("address")) {
+				hotelAddress = jsonObject.get("address").getAsJsonObject();}
+				String hotelContacts = jsonObject.get("contacts").getAsJsonArray().toString().replaceAll("\"", "");
 
 				for (Offer offer : hotelOffer.getOffers()) {
 
@@ -72,15 +75,23 @@ public class SearchHotelsService {
 				
 					// Create response model which will be send to the client
 					SearchResponseModel offerResponse = new SearchResponseModel();
-					offerResponse.setRoompPrice(offer.getPrice().getTotal());
+					offerResponse.setRoomPrice(offer.getPrice().getTotal());
 					offerResponse.setChekInDate(checkInDate);
 					offerResponse.setCheckOutDate(checkOutDate);
 					offerResponse.setRadius(searchObject.getRadius());
 					offerResponse.setNbPers(searchObject.getNbPers());
 					offerResponse.setCity(searchObject.getCityName());
-					offerResponse.setAddress(hotelAddress);
+					
+					Address hotelAdr= new Address();
+					if(jsonObject.has("address")) {
+					hotelAdr.setCity(hotelAddress.get("city").getAsString());
+					hotelAdr.setPostal_code(hotelAddress.get("postal_code").getAsString());
+					hotelAdr.setLine1(hotelAddress.get("line1").getAsString());}
+					offerResponse.setAddress(hotelAdr);
 					offerResponse.setHotelName(hotelName);
 					offerResponse.setHotelContacts(hotelContacts);
+					
+					System.out.println(offerResponse.toString());
 					searchResponseModels.add(offerResponse);
 
 				}
@@ -96,7 +107,7 @@ public class SearchHotelsService {
 
 	// Get City Geocode Json from google APi
 	private LatLng getCityGeoCodeByName(String cityName) {
-		return GoogleMapApiAccess.getCityGeoCodeByCityName("Paris, France");
+		return GoogleMapApiAccess.getCityGeoCodeByCityName(cityName);
 	}
 	
 	private StringBuffer getHotelInformationsById(String hotelId, String checkInDate, String checkOutDate) {
