@@ -35,8 +35,34 @@ public class Publication {
 	private int owner;
 
 	//y aura d'autres attributs 
-
-
+	@Column(name = "ROOMPRICE")
+	private float roomPrice;
+	
+	@Column(name = "NBPERS")
+	private int nbPers;
+	
+	@Column(name = "RADIUS")
+	private int radius;
+	
+	@Column(name = "CHECKOUTDATE")
+	private String checkOutDate;
+	
+	@Column(name = "CHECKINDATE")
+	private String chekInDate;
+	
+	@Column(name = "WEATHER")
+	private String weather;
+	
+	@Column(name = "CITY")
+	private String city;
+	
+	@Column(name = "HOTELNAME")
+	private String hotelName;
+	
+	@Column(name = "ADDRESS")
+	private String address;
+	
+	
 	@ManyToMany(mappedBy="publications")
 	private Set<Abonne> abonnes;
 
