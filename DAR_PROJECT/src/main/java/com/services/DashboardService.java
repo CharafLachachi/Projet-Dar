@@ -18,7 +18,7 @@ public class DashboardService {
 	public String getPublications() {
 		return null;
 	}
-
+	
 	public static List<Publication> getAbonneByUserName(String userID) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();

@@ -34,6 +34,7 @@ public class Publication {
 	@Column(name = "OWNER")
 	private int owner;
 
+	
 	//y aura d'autres attributs 
 	@Column(name = "ROOMPRICE")
 	private float roomPrice;
