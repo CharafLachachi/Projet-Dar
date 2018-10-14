@@ -1,7 +1,5 @@
 package helpers.models;
 
-import com.amadeus.resources.HotelOffer.HotelTax;
-
 public class SearchResponseModel {
 	private String roomPrice;
 	private Integer radius;
@@ -9,7 +7,7 @@ public class SearchResponseModel {
 	private String chekInDate;
 	private String checkOutDate;
 	private AddressModel address;
-	private String weather;
+	private WeatherModel weather;
 	private String picture;
 	private String city;
 	private String hotelName;
@@ -65,11 +63,11 @@ public class SearchResponseModel {
 		this.address = address;
 	}
 
-	public String getWeather() {
+	public WeatherModel getWeather() {
 		return weather;
 	}
 
-	public void setWeather(String weather) {
+	public void setWeather(WeatherModel weather) {
 		this.weather = weather;
 	}
 

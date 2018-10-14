@@ -21,6 +21,7 @@ import helpers.models.AddressModel;
 import helpers.models.HotelContactModel;
 import helpers.models.SearchRequestModel;
 import helpers.models.SearchResponseModel;
+import helpers.models.WeatherModel;
 
 /*
  * 
@@ -121,6 +122,11 @@ public class SearchHotelsService {
 							}
 						}
 					}
+					if (hotelAdr.getCity() != null && !hotelAdr.getCity().isEmpty()) {
+						WeatherModel weatherHotel = GetWeatherByCityService.getWeatherByCityName(hotelAdr.getCity());
+						offerResponse.setWeather(weatherHotel);
+					}
+				
 					offerResponse.setHotelContacts(hotelContact);
 
 				
