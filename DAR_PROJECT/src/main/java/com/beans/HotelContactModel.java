@@ -30,7 +30,7 @@ public class HotelContactModel {
 
 	/*relation avec publication */
 
-	@OneToMany(mappedBy="contactHotel")
+	@OneToMany(mappedBy="hotelContacts")
 	private List<Publication> publications;
 	public List<Publication> getPublications(){
 		return this.publications;

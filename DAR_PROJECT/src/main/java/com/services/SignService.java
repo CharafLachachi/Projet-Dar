@@ -50,6 +50,8 @@ public class SignService {
 	}
 	
 	public Abonne loginAbonne(String email, String password){
+		
+		// TODO replace by getAbonneByUsernameAndPassword
 		Abonne abonne = AbonneDAO.getAbonneByUserName(email);
 		return abonne;
 	}

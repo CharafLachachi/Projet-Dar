@@ -31,6 +31,30 @@ public abstract class AbonneDAO {
 
 	}
 	
+	public static Abonne getAbonneById(int id) {
+		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+		Session session  = sessionFactory.getCurrentSession();
+		if (!session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		Transaction tx = null;
+		Abonne abonne = null;
+		try {
+			tx = session.getTransaction();
+			tx.begin();
+			Query query = session.createQuery("FROM Abonne a WHERE a.ABONNE_id='" + id + "'");
+			abonne = (Abonne) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+		}
+		return abonne;
+
+	}
 	public static Abonne getAbonneByUserName(String email) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
@@ -42,7 +66,7 @@ public abstract class AbonneDAO {
 		try {
 			tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("from Abonne a where a.email='" + email + "'");
+			Query query = session.createQuery("FROM Abonne a WHERE a.email='" + email + "'");
 			abonne = (Abonne) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
@@ -67,7 +91,7 @@ public abstract class AbonneDAO {
 		try {
 			tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("from Abonne a where a.username='" + username + "' éé a.password ='"+ password+ "'");
+			Query query = session.createQuery("from Abonne a where a.username='" + username + "' and  a.password ='"+ password+ "'");
 			abonne = (Abonne) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {

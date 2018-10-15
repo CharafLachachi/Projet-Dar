@@ -65,7 +65,7 @@ public class Publication {
 	  // TODO relation to many 
 	@ManyToOne
 	@JoinColumn(name="CONTACT_ID")
-	private HotelContactModel contactHotel;
+	private HotelContactModel hotelContacts;
 	
 	@Column(name = "CITY")
 	private String city;
@@ -162,11 +162,11 @@ public class Publication {
 	}
 
 	public HotelContactModel getContactHotel() {
-		return contactHotel;
+		return hotelContacts;
 	}
 
 	public void setContactHotel(HotelContactModel contactHotel) {
-		this.contactHotel = contactHotel;
+		this.hotelContacts = contactHotel;
 	}
 
 	public String getCity() {

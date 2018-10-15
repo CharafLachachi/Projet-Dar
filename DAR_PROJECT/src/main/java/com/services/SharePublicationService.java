@@ -8,9 +8,12 @@ import com.google.gson.JsonObject;
 public abstract class SharePublicationService {
 	public static boolean addPublictaion(StringBuffer pubJson) {
 		boolean res = false;
-		Publication jsonObject = new Gson().fromJson(pubJson.toString(), Publication.class);
-		System.out.println(jsonObject.toString());
-		PublicationDAO.addPublic(jsonObject);
+		int ownerId = new Gson().fromJson(pubJson.toString(),JsonObject.class).getAsJsonObject().get("idUser").getAsInt();
+		
+		Publication pub = new Gson().fromJson(pubJson.toString(), Publication.class);
+		System.out.println(pub.toString());
+		pub.setOwner(ownerId);
+		PublicationDAO.addPublic(pub,ownerId);
 		return res;
 	}
 }

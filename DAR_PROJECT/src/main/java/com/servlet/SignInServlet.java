@@ -72,9 +72,11 @@ public class SignInServlet extends HttpServlet {
 
 		JsonObject created_abonne_response_json = new JsonObject();
 		System.err.println(abonne);
-		created_abonne_response_json.addProperty("token", getJWT_Token(abonne.getUsername(), abonne.getABONNE_id(),
-				abonne.getFirstname(), abonne.getEmail(), abonne.getLastname()));
+		String token = getJWT_Token(abonne.getUsername(), abonne.getABONNE_id(),
+				abonne.getFirstname(), abonne.getEmail(), abonne.getLastname());
+		created_abonne_response_json.addProperty("token", token);
 		response.setContentType("application/json;charset=utf-8");
+		System.out.println(token);
 		response.getWriter().print(created_abonne_response_json);
 	}
 

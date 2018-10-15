@@ -31,6 +31,7 @@ public class SharePublicationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		StringBuffer pubRequestAsJson = PasrseJsonUtility.getRequestJson(request);
+		System.out.println(pubRequestAsJson);
 		boolean resp = SharePublicationService.addPublictaion(pubRequestAsJson);
 		response.getWriter().append("{\"Served at:\" : \"hello \" }");
 	}

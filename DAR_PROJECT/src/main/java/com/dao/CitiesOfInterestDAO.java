@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.beans.Abonne;
 import com.beans.CitiesOfInterest;
 import com.utils.HibernateUtility;
 
@@ -50,5 +51,29 @@ public abstract class CitiesOfInterestDAO {
 			session.close();
 		}
 
+	}
+	
+	public static CitiesOfInterest getCityByName(String name) {
+		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+		Session session  = sessionFactory.getCurrentSession();
+		if (!session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		Transaction tx = null;
+		CitiesOfInterest city = null;
+		try {
+			tx = session.getTransaction();
+			tx.begin();
+			Query query = session.createQuery("FROM CitiesOfInterest a WHERE a.city_name='" + name + "'");
+			city = (CitiesOfInterest) query.uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+		}
+		return city;
 	}
 }
