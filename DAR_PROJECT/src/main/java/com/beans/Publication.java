@@ -61,7 +61,7 @@ public class Publication {
 	
 	  // TODO relation to many 
 	@ManyToOne
-	@JoinColumn(name="contactHotel")
+	@JoinColumn(name="CONTACT_ID")
 	private HotelContactModel contactHotel;
 	
 	@Column(name = "CITY")
@@ -72,7 +72,7 @@ public class Publication {
     // TODO relation to many 
 	
 	@ManyToOne
-	@JoinColumn(name="adress")
+	@JoinColumn(name="address_id")
 	private AddressModel address;
 	
 	
