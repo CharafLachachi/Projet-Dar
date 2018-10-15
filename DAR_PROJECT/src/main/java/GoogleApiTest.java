@@ -7,6 +7,7 @@ import com.amadeus.resources.HotelOffer;
 import com.amadeus.resources.HotelOffer.MediaURI;
 import com.amadeus.resources.HotelOffer.Offer;
 import com.amadeus.shopping.Hotel;
+import com.api.TheWeatherApiAccess;
 
 public class GoogleApiTest {
 
@@ -14,7 +15,7 @@ public class GoogleApiTest {
 //		Gson gson = new  Gson();
 //		
 //		StringBuffer googleResponse;
-//	try {
+	try {
 //			System.err.println(GoogleMapApiAccess.getCityGeoCodeByCityName("Paris, France"));
 //			googleResponse = GoogleMapApiAccess.GetResponseFromAPI(
 //					GoogleMapApiAccess.
@@ -32,24 +33,26 @@ public class GoogleApiTest {
 //		
 //		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-		Amadeus amadeus = Amadeus.builder("YhkwZHS3fGykKY95hO4xX1SEF9NGL18u", "74EAgWWFpZt9ZcFm").build();
-		try {
-			HotelOffer[] offers = amadeus.shopping.hotelOffers
-					.get(Params.with("latitude", "48.864716").and("longitude", "2.349014").and("priceRange=0-", "500")
-							.and("checkInDate", "2018-10-12").and("checkOutDate", "2018-10-22").and("radius", "20")
-							.and("adults","3"));
+//		Amadeus amadeus = Amadeus.builder("YhkwZHS3fGykKY95hO4xX1SEF9NGL18u", "74EAgWWFpZt9ZcFm").build();
+//		try {
+//			HotelOffer[] offers = amadeus.shopping.hotelOffers
+//					.get(Params.with("latitude", "48.864716").and("longitude", "2.349014").and("priceRange=0-", "500")
+//							.and("checkInDate", "2018-10-12").and("checkOutDate", "2018-10-22").and("radius", "20")
+//							.and("adults","3"));
+//			
+//			for (HotelOffer hotelOffer : offers) {
+//				
+//				System.out.println(hotelOffer.getHotel().getHotelId());
+//				for (Offer offer: hotelOffer.getOffers()) {
+//					System.out.println(offer.getPrice());
+//				}
+//
+//			}
+		System.out.println(TheWeatherApiAccess.GetResponseFromAPI(TheWeatherApiAccess.getDailyWeatherByCityName("Paris")));
+	
+		System.out.println(TheWeatherApiAccess.GetResponseFromAPI(TheWeatherApiAccess.getXDayWeatherByCityName("Paris",7)));
 			
-			for (HotelOffer hotelOffer : offers) {
-				
-				System.out.println(hotelOffer.getHotel().getHotelId());
-				for (Offer offer: hotelOffer.getOffers()) {
-					System.out.println(offer.getPrice());
-				}
-
-			}
-			
-			
-		} catch (ResponseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

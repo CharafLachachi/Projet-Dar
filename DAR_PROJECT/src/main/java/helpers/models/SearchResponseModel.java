@@ -6,12 +6,12 @@ public class SearchResponseModel {
 	private Integer nbPers;
 	private String chekInDate;
 	private String checkOutDate;
-	private Address address;
-	private String weather;
+	private AddressModel address;
+	private WeatherModel weather;
 	private String picture;
 	private String city;
 	private String hotelName;
-	private String hotelContacts;
+	private HotelContactModel hotelContacts;
 	
 	public SearchResponseModel() {}
 
@@ -55,19 +55,19 @@ public class SearchResponseModel {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public Address getAddress() {
+	public AddressModel getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(AddressModel address) {
 		this.address = address;
 	}
 
-	public String getWeather() {
+	public WeatherModel getWeather() {
 		return weather;
 	}
 
-	public void setWeather(String weather) {
+	public void setWeather(WeatherModel weather) {
 		this.weather = weather;
 	}
 
@@ -95,11 +95,11 @@ public class SearchResponseModel {
 		this.hotelName = hotelName;
 	}
 
-	public String getHotelContacts() {
+	public HotelContactModel getHotelContacts() {
 		return hotelContacts;
 	}
 
-	public void setHotelContacts(String hotelContacts) {
+	public void setHotelContacts(HotelContactModel hotelContacts) {
 		this.hotelContacts = hotelContacts;
 	}
 

@@ -3,23 +3,42 @@ package com.services;
 import com.api.TheWeatherApiAccess;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class GetWeatherByCityService {
+import helpers.models.WeatherModel;
+
+public abstract class GetWeatherByCityService {
 	
-	public JsonObject getWeatherByCityName(String cityName) {
+	public static WeatherModel getWeatherByCityName(String cityName) {
 		StringBuffer response;
 		try {
-			response = TheWeatherApiAccess.GetResponseFromAPI(TheWeatherApiAccess.getWeatherByCityName(cityName));
+			response = TheWeatherApiAccess.GetResponseFromAPI(TheWeatherApiAccess.getDailyWeatherByCityName(cityName));
 			if (response != null) {
 				System.out.println(response.toString());
 			} else System.out.println("response null");
 			Gson gson = new GsonBuilder().create();
 			JsonParser parser = new JsonParser();
-			JsonObject o = parser.parse(response.toString()).getAsJsonObject();
+			JsonObject weatherObjectJson = parser.parse(response.toString()).getAsJsonObject();
+			
+			WeatherModel weatherModel = new WeatherModel();
+			if (weatherObjectJson.has("weather") && weatherObjectJson.has("main")) {
+				JsonArray weatherArray = weatherObjectJson.get("weather").getAsJsonArray();
+				if (weatherArray.size() != 0) {
+				JsonObject weather = weatherArray.get(0).getAsJsonObject();
+				
+				weatherModel.setDescription(weather.get("description").getAsString());
+				weatherModel.setIcon(weather.get("icon").getAsString());
+				weatherModel.setMain(weather.get("main").getAsString());
+				weatherModel.setId(weather.get("id").getAsInt());
+				weatherModel.setIcon(weather.get("icon").getAsString().replaceAll("n", "d"));
+				weatherModel.setTemp(weatherObjectJson.get("main").getAsJsonObject().get("temp").getAsInt());
+				}
+				}
+			
 
-			return o;
+			return weatherModel;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

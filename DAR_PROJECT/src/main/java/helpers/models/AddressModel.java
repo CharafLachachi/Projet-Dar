@@ -1,6 +1,6 @@
 package helpers.models;
 
-public class Address {
+public class AddressModel {
 	private String line1;
 	private String city;
 	private String postal_code;
@@ -22,8 +22,13 @@ public class Address {
 	public void setPostal_code(String postal_code) {
 		this.postal_code = postal_code;
 	}
-	public Address() {
+	public AddressModel() {
 		super();
 	}
+	@Override
+	public String toString() {
+		return "AddressModel [line1=" + line1 + ", city=" + city + ", postal_code=" + postal_code + "]";
+	}
+	
 	
 }

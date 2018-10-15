@@ -33,7 +33,7 @@ public abstract class AmadeusHotelsApiAccess {
 				HotelOffer[] offers = amadeus.shopping.hotelOffers.get(Params
 						  .with("latitude", latitude).
 						  and("longitude", longitude).
-						  and("priceRange=0-", maxPrice).
+//						  and("priceRange=0-", maxPrice).
 						  and("checkInDate", checkin).
 						  and("checkOutDate", checkout).
 						  and("radius", radius)
@@ -46,13 +46,7 @@ public abstract class AmadeusHotelsApiAccess {
 			return null;
 		}
 		
-		public String getHotelInfos(String hotelId) {
-			try {
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			return null;
-		}
+		
 		
 	}
 

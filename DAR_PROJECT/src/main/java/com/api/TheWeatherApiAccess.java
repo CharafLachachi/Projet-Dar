@@ -7,6 +7,7 @@ import java.net.URL;
 
 public class TheWeatherApiAccess {
 	public static String API_KEY = "ccb2eb6b449c527bf5b1fa7c7db9117d";
+	public static String API_KEY2 = "7545538332092e099f6445285ca4109c";
 	
 	public static StringBuffer GetResponseFromAPI(String string_url) throws Exception {
 		String inputLine;
@@ -25,8 +26,18 @@ public class TheWeatherApiAccess {
 		return response;
 	}
 	
-	public static String getWeatherByCityName(String cityName) {
+	public static String getDailyWeatherByCityName(String cityName) {
 		return "https://api.openweathermap.org/data/2.5/weather?q="+cityName +
 				"&appid=" + API_KEY + "&units=metric" ;
+	}
+	
+	public static String getXDayWeatherByCityName(String cityName, int days) {
+		return 	
+		"https://api.openweathermap.org/data/2.5/forecast/daily?"
+		+ "q="+cityName
+		+"&mode=xml"
+		+"&units=metric"
+		+"&cnt="+days
+		+"&appid=" + API_KEY2;
 	}
 }
