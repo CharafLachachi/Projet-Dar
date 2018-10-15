@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -52,10 +55,13 @@ public class Publication {
 	private String chekInDate;
 	 // TODO relation to many 
 	
-	@Column(name = "WEATHER")
+	@OneToOne
 	private WeatherModel weather;
-	   // TODO relation to many 
-	@Column(name = "CONTACT")
+	
+	
+	  // TODO relation to many 
+	@ManyToOne
+	@JoinColumn(name="contactHotel")
 	private HotelContactModel contactHotel;
 	
 	@Column(name = "CITY")
@@ -64,7 +70,9 @@ public class Publication {
 	@Column(name = "HOTELNAME")
 	private String hotelName;
     // TODO relation to many 
-	@Column(name = "ADDRESS")
+	
+	@ManyToOne
+	@JoinColumn(name="adress")
 	private AddressModel address;
 	
 	

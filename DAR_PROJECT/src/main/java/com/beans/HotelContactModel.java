@@ -1,13 +1,37 @@
 package com.beans;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+
 public class HotelContactModel {
+
+	@Column(name = "TEL")
 	private String tel;
+
+	@Column(name = "EMAIL")
 	private String email;
+
+	@Column(name = "URL")
 	private String url;
-	public HotelContactModel() {
-		
+
+
+	/*relation avec publication */
+
+	@OneToMany(mappedBy="contactHotel")
+	private List<Publication> publications;
+
+	public List<Publication> getPublications(){
+		return this.publications;
 	}
-	
+
+
+
+	public HotelContactModel() {
+
+	}
+
 	public HotelContactModel(String tel, String email, String url) {
 		super();
 		this.tel = tel;
@@ -36,6 +60,6 @@ public class HotelContactModel {
 	public String toString() {
 		return "HotelContactModel [tel=" + tel + ", email=" + email + ", url=" + url + "]";
 	}
-	
-	
+
+
 }

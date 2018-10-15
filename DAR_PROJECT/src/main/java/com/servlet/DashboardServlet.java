@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.services.DashboardService;
 import com.services.SearchHotelsService;
+import com.utils.PasrseJsonUtility;
 
 @WebServlet(name = "dashboard", urlPatterns = { "/dashboard" })
 public class DashboardServlet extends HttpServlet{
@@ -23,14 +24,15 @@ public class DashboardServlet extends HttpServlet{
 	protected DashboardService dashboardService;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
+		System.out.println(jb.toString());
 	}
 	
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(req, resp);
+		doGet(request, response);
 	}
 }

@@ -1,11 +1,41 @@
 package com.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "Weather")
 public class WeatherModel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "WETHER_ID")
 	private Integer id;
+	
+	@Column(name = "MAIN")
 	private String main;
+	
+	@Column(name = "DESCRIPTION")
 	private String description;
+	
+	@Column(name = "ICON")
 	private String icon;
+	
+	@Column(name = "TEMP")
 	private Integer temp;
+	
+	/*relation avec publication */
+	@OneToOne
+	private Publication pub;
+	
+	public Publication getPub() {
+		return pub;
+	}
 	
 	public WeatherModel() {
 	}
@@ -63,6 +93,11 @@ public class WeatherModel {
 	public String toString() {
 		return "WeatherModel [id=" + id + ", main=" + main + ", description=" + description + ", icon=" + icon
 				+ ", temp=" + temp + "]";
+	}
+
+
+	public void setPub(Publication pub) {
+		this.pub = pub;
 	}
 	
 	
