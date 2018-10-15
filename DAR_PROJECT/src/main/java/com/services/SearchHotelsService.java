@@ -11,17 +11,17 @@ import com.amadeus.resources.HotelOffer.Offer;
 import com.api.AmadeusHotelsApiAccess;
 import com.api.AmadeusHotelsInformationApiAcess;
 import com.api.GoogleMapApiAccess;
+import com.beans.AddressModel;
+import com.beans.HotelContactModel;
+import com.beans.WeatherModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.maps.model.LatLng;
 
-import helpers.models.AddressModel;
-import helpers.models.HotelContactModel;
 import helpers.models.SearchRequestModel;
 import helpers.models.SearchResponseModel;
-import helpers.models.WeatherModel;
 
 /*
  * 

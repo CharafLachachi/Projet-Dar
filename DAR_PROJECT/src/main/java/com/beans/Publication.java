@@ -50,18 +50,22 @@ public class Publication {
 	
 	@Column(name = "CHECKINDATE")
 	private String chekInDate;
+	 // TODO relation to many 
 	
 	@Column(name = "WEATHER")
-	private String weather;
+	private WeatherModel weather;
+	   // TODO relation to many 
+	@Column(name = "CONTACT")
+	private HotelContactModel contactHotel;
 	
 	@Column(name = "CITY")
 	private String city;
 	
 	@Column(name = "HOTELNAME")
 	private String hotelName;
-	
+    // TODO relation to many 
 	@Column(name = "ADDRESS")
-	private String address;
+	private AddressModel address;
 	
 	
 	@ManyToMany(mappedBy="publications")
@@ -73,4 +77,14 @@ public class Publication {
 	public List<Commentaire> getComments(){
 		return this.comments;
 	}
+
+	@Override
+	public String toString() {
+		return "Publication [Pub_id=" + Pub_id + ", owner=" + owner + ", roomPrice=" + roomPrice + ", nbPers=" + nbPers
+				+ ", radius=" + radius + ", checkOutDate=" + checkOutDate + ", chekInDate=" + chekInDate + ", weather="
+				+ weather + ", city=" + city + ", hotelName=" + hotelName + ", address=" + address + ", abonnes="
+				+ abonnes + ", comments=" + comments + "]";
+	}
+	
+	
 }

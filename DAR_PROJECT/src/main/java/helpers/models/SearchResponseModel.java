@@ -1,5 +1,9 @@
 package helpers.models;
 
+import com.beans.AddressModel;
+import com.beans.HotelContactModel;
+import com.beans.WeatherModel;
+
 public class SearchResponseModel {
 	private String roomPrice;
 	private Integer radius;

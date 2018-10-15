@@ -1,13 +1,12 @@
 package com.services;
 
 import com.api.TheWeatherApiAccess;
+import com.beans.WeatherModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import helpers.models.WeatherModel;
 
 public abstract class GetWeatherByCityService {
 	

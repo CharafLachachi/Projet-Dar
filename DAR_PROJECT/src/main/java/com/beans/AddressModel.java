@@ -1,4 +1,4 @@
-package helpers.models;
+package com.beans;
 
 public class AddressModel {
 	private String line1;

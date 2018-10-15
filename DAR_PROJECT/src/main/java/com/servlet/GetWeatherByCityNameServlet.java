@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.beans.WeatherModel;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.services.GetWeatherByCityService;
 
@@ -41,26 +43,26 @@ public class GetWeatherByCityNameServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.println("-----------"+request.getParameter("city_name"));
-//		JsonObject json_wheater_by_name= new JsonObject();
-//		try {
-//			if (!request.getParameter("city_name").equals("")) {
-//				get_weather_by_name_service = new GetWeatherByCityService();
-//				json_wheater_by_name = get_weather_by_name_service
-//						.getWeatherByCityName(request.getParameter("city_name"));
-//			} else {
-//				json_wheater_by_name = null;
-//			}
-//			response.setCharacterEncoding("UTF-8");
-//			response.setContentType("application/json;charset=utf-8");
-//			response.getWriter().print(json_wheater_by_name);
-//			//response.getWriter().append("Served Successful at: ").append(request.getContextPath());
-//		} catch (Exception e) {
-//			e.printStackTrace(); // local debug
-//			request.setAttribute("error", e); // remote debug
-//			response.getWriter().print(e);
-//		}
-//	
+		System.out.println("-----------"+request.getParameter("city_name"));
+		String json_wheater_by_name ;
+		try {
+			if (!request.getParameter("city_name").equals("")) {
+				WeatherModel weather = GetWeatherByCityService
+						.getWeatherByCityName(request.getParameter("city_name"));
+				json_wheater_by_name = new Gson().toJson(weather, WeatherModel.class);
+			} else {
+				json_wheater_by_name = null;
+			}
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json;charset=utf-8");
+			//response.getWriter().print(json_wheater_by_name);
+			response.getWriter().append("Served Successful at: ").append(request.getContextPath());
+		} catch (Exception e) {
+			e.printStackTrace(); // local debug
+			request.setAttribute("error", e); // remote debug
+			response.getWriter().print(e);
+		}
+	
 	}
 
 	/**
