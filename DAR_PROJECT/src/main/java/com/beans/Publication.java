@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +57,8 @@ public class Publication {
 	private String chekInDate;
 	 // TODO relation to many 
 	
-	@OneToOne
+	@OneToOne(mappedBy = "pub", cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, optional = false)
 	private WeatherModel weather;
 	
 	
@@ -93,6 +96,116 @@ public class Publication {
 				+ weather + ", city=" + city + ", hotelName=" + hotelName + ", address=" + address + ", abonnes="
 				+ abonnes + ", comments=" + comments + "]";
 	}
+
+	public int getPub_id() {
+		return Pub_id;
+	}
+
+	public void setPub_id(int pub_id) {
+		Pub_id = pub_id;
+	}
+
+	public int getOwner() {
+		return owner;
+	}
+
+	public void setOwner(int owner) {
+		this.owner = owner;
+	}
+
+	public float getRoomPrice() {
+		return roomPrice;
+	}
+
+	public void setRoomPrice(float roomPrice) {
+		this.roomPrice = roomPrice;
+	}
+
+	public int getNbPers() {
+		return nbPers;
+	}
+
+	public void setNbPers(int nbPers) {
+		this.nbPers = nbPers;
+	}
+
+	public int getRadius() {
+		return radius;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+
+	public String getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(String checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	public String getChekInDate() {
+		return chekInDate;
+	}
+
+	public void setChekInDate(String chekInDate) {
+		this.chekInDate = chekInDate;
+	}
+
+	public WeatherModel getWeather() {
+		return weather;
+	}
+
+	public void setWeather(WeatherModel weather) {
+		this.weather = weather;
+	}
+
+	public HotelContactModel getContactHotel() {
+		return contactHotel;
+	}
+
+	public void setContactHotel(HotelContactModel contactHotel) {
+		this.contactHotel = contactHotel;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public AddressModel getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressModel address) {
+		this.address = address;
+	}
+
+	public Set<Abonne> getAbonnes() {
+		return abonnes;
+	}
+
+	public void setAbonnes(Set<Abonne> abonnes) {
+		this.abonnes = abonnes;
+	}
+
+	public void setComments(List<Commentaire> comments) {
+		this.comments = comments;
+	}
+	
+	
 	
 	
 }

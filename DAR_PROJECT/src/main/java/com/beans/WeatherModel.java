@@ -2,9 +2,11 @@ package com.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,7 +32,8 @@ public class WeatherModel {
 	private Integer temp;
 	
 	/*relation avec publication */
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PUB_ID")
 	private Publication pub;
 	
 	public Publication getPub() {
