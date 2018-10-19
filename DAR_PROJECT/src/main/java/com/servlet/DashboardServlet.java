@@ -8,8 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.services.DashboardService;
-import com.services.SearchHotelsService;
 import com.utils.PasrseJsonUtility;
 
 @WebServlet(name = "dashboard", urlPatterns = { "/dashboard" })
@@ -18,15 +22,20 @@ public class DashboardServlet extends HttpServlet{
 
 	public DashboardServlet() {
 		super();
-		this.dashboardService = new DashboardService();
 	}
 	private static final long serialVersionUID = -5391021665344599461L;
-	protected DashboardService dashboardService;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 		System.out.println(jb.toString());
+		Gson gson = new Gson();
+		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
+		String userId = jsonObject.get("userid").getAsString();
+		
+		String res = DashboardService.getDashBoardPublicationsByUserId(userId);
+		response.getWriter().println(res);
+		
 	}
 	
 

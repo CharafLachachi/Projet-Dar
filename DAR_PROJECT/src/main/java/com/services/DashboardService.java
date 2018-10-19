@@ -11,40 +11,32 @@ import org.jboss.jandex.TypeTarget.Usage;
 
 import com.beans.Abonne;
 import com.beans.Publication;
+import com.dao.DashboardDAO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utils.HibernateUtility;
 
-public class DashboardService {
+public abstract class DashboardService {
+	public static DashboardDAO dao = new DashboardDAO();
 
 	public String getPublications() {
 		return null;
 	}
-	
-	public static List<Publication> getPublications(String userID) {
-		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
-		Session session  = sessionFactory.getCurrentSession();
-		if (!session.isOpen()) {
-			session = sessionFactory.openSession();
-		}
-		Transaction tx = null;
-		Publication publication = null;
-		List result = null;
+
+	public static String getDashBoardPublicationsByUserId(String userID) {
+		List list = dao.getPublications(userID);
+
+		ObjectMapper mapper = new ObjectMapper();
+		System.err.println(list.size());
+		String jsonInString = null ;
 		try {
-			tx = session.getTransaction();
-			tx.begin();
-			/**
-			 * SELECT * FROM Publication p WHERE p.pub_id in (SELECT pub_id FROM Abonne_cities WHERE id_user=User_id
-			 */
-			Query query = session.createQuery("from Publication p");
-			//query.setParameter("id", userID);
-			result = query.list();
-			//tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
+			jsonInString = mapper.writeValueAsString(list);
+			System.out.println(jsonInString);
+		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-		} finally {
 		}
-		return result;
+		System.out.println("----"+jsonInString);
+		return jsonInString;
+
 	}
 }

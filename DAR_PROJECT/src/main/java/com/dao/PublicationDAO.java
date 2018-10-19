@@ -20,7 +20,7 @@ public abstract class PublicationDAO {
 		AddressModel address = pub.getAddress();
 
 		// Step2 Add contact :
-		HotelContactModel contact = pub.getContactHotel();
+		HotelContactModel contact = pub.getHotelContacts();
 
 		// Step 3 add Weather
 		WeatherModel weather =  pub.getWeather();

@@ -165,12 +165,14 @@ public class Publication {
 		this.weather = weather;
 	}
 
-	public HotelContactModel getContactHotel() {
+	
+
+	public HotelContactModel getHotelContacts() {
 		return hotelContacts;
 	}
 
-	public void setContactHotel(HotelContactModel contactHotel) {
-		this.hotelContacts = contactHotel;
+	public void setHotelContacts(HotelContactModel hotelContacts) {
+		this.hotelContacts = hotelContacts;
 	}
 
 	public String getCity() {

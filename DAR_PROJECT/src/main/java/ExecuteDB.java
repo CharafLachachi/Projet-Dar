@@ -46,20 +46,20 @@ public class ExecuteDB {
 //		}else {
 //			System.err.println("username exist");
 //		}
-			List<Publication> list = DashboardService.getPublications("1");
-			ObjectMapper mapper = new ObjectMapper();
-			//	Staff obj = new Staff();
-
-
-			//Object to JSON in String
-			System.err.println(list.size());
-			try {
-				String jsonInString = mapper.writeValueAsString(list);
-				System.out.println(jsonInString);
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			List<Publication> list = DashboardService.getPublications("1");
+//			ObjectMapper mapper = new ObjectMapper();
+//			//	Staff obj = new Staff();
+//
+//
+//			//Object to JSON in String
+//			System.err.println(list.size());
+//			try {
+//				String jsonInString = mapper.writeValueAsString(list);
+//				System.out.println(jsonInString);
+//			} catch (JsonProcessingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 	}
 	
