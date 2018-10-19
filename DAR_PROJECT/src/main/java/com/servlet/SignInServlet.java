@@ -64,7 +64,7 @@ public class SignInServlet extends HttpServlet {
 			throws ServletException, IOException {
 		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 
-		System.out.println(jb.toString());
+		System.out.println("Json   "+jb.toString());
 
 		LoginModel loginObject = (new Gson().fromJson(jb.toString(), LoginModel.class));
 

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import com.beans.Abonne;
 import com.utils.HibernateUtility;
@@ -20,13 +21,16 @@ public abstract class AbonneDAO {
 			session = sessionFactory.openSession();
 		}
 		Transaction tx = session.beginTransaction();
+	
 		try {
 			session.save(abonne);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 		}
-		tx.commit();
+		if (tx.getStatus().equals(TransactionStatus.ACTIVE)) { 
+		    tx.commit();
+		}
 		System.out.println("n Abonne added \n");
 
 	}

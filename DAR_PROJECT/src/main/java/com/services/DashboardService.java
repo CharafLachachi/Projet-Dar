@@ -19,7 +19,7 @@ public class DashboardService {
 		return null;
 	}
 	
-	public static List<Publication> getAbonneByUserName(String userID) {
+	public static List<Publication> getPublications(String userID) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
 		if (!session.isOpen()) {
@@ -34,15 +34,10 @@ public class DashboardService {
 			/**
 			 * SELECT * FROM Publication p WHERE p.pub_id in (SELECT pub_id FROM Abonne_cities WHERE id_user=User_id
 			 */
-			Query query = session.createQuery("from Publication a where a.pub_id in (from =:id + ");
-			query.setParameter("id", userID);
+			Query query = session.createQuery("from Publication p");
+			//query.setParameter("id", userID);
 			result = query.list();
-			tx.commit();
-			List<Publication> pubs = new ArrayList<Publication>();
-			for( int i=0 ; i < result.size() ; i++ ) {
-				pubs.set(i, (Publication) result.get(i));
-			}
-
+			//tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();

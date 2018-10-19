@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 /**
  * 
@@ -26,6 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "PUBLICATION")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Publication {
 	public Publication() {
 		this.comments = new ArrayList<Commentaire>();

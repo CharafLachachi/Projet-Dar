@@ -4,7 +4,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
@@ -22,12 +34,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "ABONNE")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Abonne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ABONNE_ID")
 	private int ABONNE_id;
-	@Column(name = "USERNAME", unique = true, nullable = false)
+	@Column(name = "USERNAME", unique = true, nullable = true)
 	private String username;
 	@Column(name = "EMAIL", unique = true, nullable = false)
 	private String email;

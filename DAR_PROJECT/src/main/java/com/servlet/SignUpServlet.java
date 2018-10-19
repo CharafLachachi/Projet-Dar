@@ -54,7 +54,7 @@ public class SignUpServlet extends HttpServlet {
 		
 		 StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 		  
-		  System.out.println(jb.toString());
+		  System.out.println("Json      "+jb.toString());
 		  
 		  SignupModel SignUpObject = (new Gson().fromJson(jb.toString(), SignupModel.class));
 		  
