@@ -58,6 +58,7 @@ public class SignUpServlet extends HttpServlet {
 		  
 		  SignupModel SignUpObject = (new Gson().fromJson(jb.toString(), SignupModel.class));
 		  
+		  System.err.println(SignUpObject.toString());
 		JsonObject created_abonne_response_json = SignService.createAbonne(
 				SignUpObject.getUsername(),
 				SignUpObject.getFirstname(),
