@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -58,6 +59,9 @@ public class Abonne {
 	private String password;
 
 
+	@Lob
+	@Column(name="PROFILE_IMAGE", nullable = true, columnDefinition="mediumblob")
+	private byte[] image;
 
 	/**
 	 * Association avec les villes
@@ -217,5 +221,12 @@ public class Abonne {
 		this.comments = comments;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 }

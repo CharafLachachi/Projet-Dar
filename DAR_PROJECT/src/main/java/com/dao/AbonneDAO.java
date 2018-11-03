@@ -45,6 +45,7 @@ public abstract class AbonneDAO {
 		Abonne abonne = null;
 		try {
 			tx = session.getTransaction();
+			if(!tx.isActive()) 
 			tx.begin();
 			Query query = session.createQuery("FROM Abonne a WHERE a.ABONNE_id='" + id + "'");
 			abonne = (Abonne) query.uniqueResult();
@@ -57,7 +58,7 @@ public abstract class AbonneDAO {
 		} finally {
 		}
 		return abonne;
-
+//j'ai ton projet tu peux copier à partir de mon pc
 	}
 	public static Abonne getAbonneByUserName(String email) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();

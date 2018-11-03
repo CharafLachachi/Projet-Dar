@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.beans.Publication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -27,17 +28,25 @@ public class DashboardServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
-		System.out.println(jb.toString());
+		//StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
+		//System.out.println(jb.toString());
+		//Gson gson = new Gson();
+		//JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
+		//String userId = jsonObject.get("userid").getAsString();
+
+		String[] res = DashboardService.getDashBoardPublicationsByUserId("1"/*userId*/);
 		Gson gson = new Gson();
-		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
-		String userId = jsonObject.get("userid").getAsString();
-		
-		String res = DashboardService.getDashBoardPublicationsByUserId(userId);
-		response.getWriter().println(res);
-		
+		String r = "[";
+		for(int i = 0 ; i < res.length ; i++ ) {
+			JsonObject jsonObject = gson.fromJson(res[i], JsonObject.class);
+			DashboardService.addOwnerName(jsonObject);
+			r = r + jsonObject;
+			if(i<res.length-1) r +=",";
+		}
+		r+="]";
+		response.getWriter().println(r);
 	}
-	
+
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

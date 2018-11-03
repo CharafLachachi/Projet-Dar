@@ -8,61 +8,51 @@ import org.hibernate.query.Query;
 
 import com.beans.Abonne;
 import com.beans.Publication;
+import com.dao.DashboardDAO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.services.DashboardService;
 import com.utils.HibernateUtility;
+import com.utils.PasrseJsonUtility;
 
 public class ExecuteDB {
 	public static void main(String[] args) {
+		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+		Session session  = sessionFactory.getCurrentSession();
+		if (!session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		Transaction tx = null;
+		Abonne abonne = null;
+		try {
+			tx = session.getTransaction();
+			tx.begin();
+			String owner = "1";
+			String userNameOwner;
+			Query query = session.createQuery("SELECT a.username FROM Abonne a WHERE a.ABONNE_id='" + owner + "'");
+			userNameOwner = query.uniqueResult().toString();
+			tx.commit();
+			
+			JsonObject ownerJO = new JsonObject();
+			ownerJO.addProperty("ownerusername", userNameOwner);
+			
+			System.out.println("userNameOwner : "+ ownerJO.get("ownerusername").getAsString());
 
-//		StandardServiceRegistry registry;
-//		SessionFactory sessionFactory;
-//		registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-//
-//		MetadataSources sources = new MetadataSources(registry);
-//
-//		Metadata metadata = sources.getMetadataBuilder().build();
-//
-//		sessionFactory = metadata.getSessionFactoryBuilder().build();
-//		// Create typesafe ServiceRegistry object
-//
-//		Session session = sessionFactory.openSession();
-//		Transaction t = session.beginTransaction();
-//		if (getAbonneByUserName("charafus") == null) {
-//			
-//		
-//		Abonne e1 = new Abonne();
-//		e1.setFirstname("Gaurav");
-//		e1.setLastname("Chawla");
-//		e1.setEmail("lac.charaf@gmail.com");
-//		e1.setUsername("charafus");
-//
-//		session.save(e1);
-//		t.commit();
-//		System.out.println("successfully saved");
-//		sessionFactory.close();
-//		session.close();
-//		}else {
-//			System.err.println("username exist");
-//		}
-//			List<Publication> list = DashboardService.getPublications("1");
-//			ObjectMapper mapper = new ObjectMapper();
-//			//	Staff obj = new Staff();
-//
-//
-//			//Object to JSON in String
-//			System.err.println(list.size());
-//			try {
-//				String jsonInString = mapper.writeValueAsString(list);
-//				System.out.println(jsonInString);
-//			} catch (JsonProcessingException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+		}
+
 
 	}
-	
+
+
 	public static Abonne getAbonneByUserName(String username) {
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
