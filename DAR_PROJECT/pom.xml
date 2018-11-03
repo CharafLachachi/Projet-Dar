@@ -6,7 +6,7 @@
 	<groupId>com</groupId>
 	<artifactId>DAR_PROJECT</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>DAR_PROJECT</name>
 	<url>http://maven.apache.org</url>
@@ -16,17 +16,17 @@
 	</properties>
 
 	<dependencies>
-	<dependency>
-    <groupId>javax.websocket</groupId>
-    <artifactId>javax.websocket-api</artifactId>
-    <version>1.1</version>
-    <scope>provided</scope>
-</dependency>
- <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.9.5</version>
-  </dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.5</version>
+		</dependency>
 		<dependency>
 			<groupId>com.amadeus</groupId>
 			<artifactId>amadeus-java</artifactId>
@@ -109,6 +109,11 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.6</version>
+			</plugin>
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.8</source>
@@ -121,9 +126,13 @@
 				<version>2.6</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<processTypes>
+						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 
 		</plugins>
 	</build>
+
 </project>
