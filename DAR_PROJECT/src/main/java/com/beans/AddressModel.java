@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -35,10 +37,10 @@ public class AddressModel {
 	
 	
 	/*relation avec publication */
-	
 	@OneToMany(mappedBy="address")
 	private List<Publication> publications;
 
+	@JsonIgnore
 	public List<Publication> getPublications(){
 		return this.publications;
 	}

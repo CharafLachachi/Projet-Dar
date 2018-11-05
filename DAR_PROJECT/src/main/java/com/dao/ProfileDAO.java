@@ -72,6 +72,7 @@ public class ProfileDAO {
 			if(!tx.isActive())
 				tx.begin();
 			
+			
 			String q = "SELECT pub_id FROM AbonnePub WHERE abo_id='"+UserID+"'";
 			String jpql = "FROM Publication p WHERE p.Pub_id IN :ids";
 			Query query = session.createSQLQuery(q);
