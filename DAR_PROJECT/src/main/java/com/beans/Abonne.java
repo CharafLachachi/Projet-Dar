@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
@@ -92,7 +93,7 @@ public class Abonne {
 
 	private Set<Publication> publications;
 
-
+	
 	/**
 	 * Associations avec les commentaires 
 	 */
@@ -209,6 +210,7 @@ public class Abonne {
 		this.cities = cities;
 	}
 
+	@JsonIgnore
 	public Set<Publication> getPublications() {
 		return publications;
 	}

@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -36,12 +37,13 @@ public class WeatherModel {
 	private Integer temp;
 	
 	/*relation avec publication */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PUB_ID")
-	private Publication pub;
+	private Publication PUB_ID;
 	
+	@JsonIgnore
 	public Publication getPub() {
-		return pub;
+		return PUB_ID;
 	}
 	
 	public WeatherModel() {
@@ -104,7 +106,7 @@ public class WeatherModel {
 
 
 	public void setPub(Publication pub) {
-		this.pub = pub;
+		this.PUB_ID = pub;
 	}
 	
 	

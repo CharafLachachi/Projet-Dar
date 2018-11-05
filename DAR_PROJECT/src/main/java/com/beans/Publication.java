@@ -43,6 +43,10 @@ public class Publication {
 	@Column(name = "OWNER")
 	private int owner;
 
+	//kayen 2 colonnes makich t recuprihiom hagda ? 
+	//mechi deux clones deux lignes il me recupere que deux lignes 
+	///j/e te montre ?
+	//vas y 
 	
 	//y aura d'autres attributs 
 	@Column(name = "ROOMPRICE")
@@ -59,9 +63,15 @@ public class Publication {
 	
 	@Column(name = "CHECKINDATE")
 	private String chekInDate;
-	 // TODO relation to many 
 	
-	@OneToOne(mappedBy = "pub", cascade = CascadeType.ALL, 
+	@Column(name = "HOTELNAME")
+	private String hotelName;
+	
+	@Column(name = "CITY")
+	private String city;
+	
+	
+	@OneToOne(mappedBy = "PUB_ID", cascade = CascadeType.ALL, 
             fetch = FetchType.LAZY, optional = false)
 	private WeatherModel weather;
 	
@@ -71,11 +81,8 @@ public class Publication {
 	@JoinColumn(name="CONTACT_ID")
 	private HotelContactModel hotelContacts;
 	
-	@Column(name = "CITY")
-	private String city;
-	
-	@Column(name = "HOTELNAME")
-	private String hotelName;
+
+
     // TODO relation to many 
 	
 	@ManyToOne
@@ -210,8 +217,5 @@ public class Publication {
 	public void setComments(List<Commentaire> comments) {
 		this.comments = comments;
 	}
-	
-	
-	
 	
 }

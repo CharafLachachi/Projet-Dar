@@ -24,6 +24,11 @@ public class DashboardDAO {
 		if (!session.isOpen()) {
 			session = sessionFactory.openSession();
 		}
+		//user id nest pas utilisé 
+		//werili la bd stp
+		//had le fichier est changé tu vx le sauvegarder
+		//c'est juste les commentaires oui okk
+		//oui juste pour le test je selectionne toutes les publications okk
 		Transaction tx = null;
 		List result = null;
 		try {
@@ -33,9 +38,7 @@ public class DashboardDAO {
 			 * SELECT * FROM Publication p WHERE p.pub_id in (SELECT pub_id FROM Abonne_cities WHERE id_user=User_id
 			 */
 			Query query = session.createQuery("from Publication p");
-			//query.setParameter("id", userID);
 			result = query.list();
-			//tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();

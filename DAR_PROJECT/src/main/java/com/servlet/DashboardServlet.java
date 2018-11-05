@@ -34,17 +34,27 @@ public class DashboardServlet extends HttpServlet{
 		//JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
 		//String userId = jsonObject.get("userid").getAsString();
 
-		String[] res = DashboardService.getDashBoardPublicationsByUserId("1"/*userId*/);
-		Gson gson = new Gson();
-		String r = "[";
-		for(int i = 0 ; i < res.length ; i++ ) {
-			JsonObject jsonObject = gson.fromJson(res[i], JsonObject.class);
-			DashboardService.addOwnerName(jsonObject);
-			r = r + jsonObject;
-			if(i<res.length-1) r +=",";
-		}
-		r+="]";
-		response.getWriter().println(r);
+		String res = DashboardService.getDashBoardPublicationsByUserId("1"/*userId*/);
+//		Gson gson = new Gson();
+//		String r = "[";
+//		for(int i = 0 ; i < res.length ; i++ ) {
+//			JsonObject jsonObject = gson.fromJson(res[i], JsonObject.class);
+//			DashboardService.addOwnerName(jsonObject);
+//			r = r + jsonObject;
+//			if(i<res.length-1) r +=",";
+//		}
+//		r+="]";
+		response.getWriter().println(res);
+		
+		
+//		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
+//		System.out.println(jb.toString());
+//		Gson gson = new Gson();
+//		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
+//		String userId = jsonObject.get("userid").getAsString();
+		
+//		String res = DashboardService.getDashBoardPublicationsByUserId("1");
+//		response.getWriter().println(res);
 	}
 
 
