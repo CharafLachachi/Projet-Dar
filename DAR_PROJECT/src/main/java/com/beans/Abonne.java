@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,7 +68,7 @@ public class Abonne {
 	/**
 	 * Association avec les villes
 	 */
-	@ManyToMany
+	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name="Abonne_Cities",
 	joinColumns=@JoinColumn(
 			name="id_abo",

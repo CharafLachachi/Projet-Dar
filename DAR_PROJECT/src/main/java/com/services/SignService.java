@@ -21,21 +21,24 @@ public class SignService {
 			abonne.setLastname(lastname);
 			abonne.setEmail(email);
 			abonne.setPassword(password);
-			AbonneDAO.addAbonne(abonne);
-
+			
+			
+			Set<CitiesOfInterest> citiesOfInterests = new HashSet<>();
 			for (int i = 0; i < cities.length; i++) {
 				// TODO verifier si la ville n'existe pas dans la bdd avant d'ajouter
 				// TODO cas juste pour le test 
 				// TODO cas reel si la ville exite on ajouter l'abonne dans la liste des abonnes de la ville 
 				CitiesOfInterest city = new CitiesOfInterest();
 				city.setCity_name(cities[i]);
-				CitiesOfInterestDAO.addCityOfInterest(city);
-				CitiesOfInterestDAO.userOfCity(abonne.getABONNE_id(), city.getCity_id());
+				citiesOfInterests.add(city);
+				//CitiesOfInterestDAO.addCityOfInterest(city);
+				//CitiesOfInterestDAO.userOfCity(abonne.getABONNE_id(), city.getCity_id());
 
 				//abonne.getCities().add(city);
 			}
 			
-			
+			abonne.setCities(citiesOfInterests);
+			AbonneDAO.addAbonne(abonne);
 			System.out.println("**************************************************"+abonne.toString());
 			abonne_json = new JsonObject();
 			abonne_json.addProperty("id_abonne", abonne.getABONNE_id());

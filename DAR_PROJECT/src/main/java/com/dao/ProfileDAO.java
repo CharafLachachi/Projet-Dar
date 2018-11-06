@@ -177,7 +177,7 @@ public class ProfileDAO {
 		try {
 		 
 		  Abonne a = (Abonne) session.get(Abonne.class,user_id);
-		  //image = a.getImage();
+		  image = a.getImage();
 		  if (tx.getStatus().equals(TransactionStatus.ACTIVE)) { 
 			    tx.commit();
 			}
@@ -205,7 +205,7 @@ public class ProfileDAO {
 		try {
 		  
 		  Abonne a = (Abonne) session.get(Abonne.class,user_id);
-		  //a.setImage(image);
+		  a.setImage(image);
 		  if (tx.getStatus().equals(TransactionStatus.ACTIVE)) { 
 			    tx.commit();
 		  }

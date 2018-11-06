@@ -51,9 +51,9 @@ public class HibernateUtility {
 			
 			
 			.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver")
-			.setProperty("hibernate.connection.url", "jdbc:mysql://dar-mysql-server.mysql.database.azure.com/dar_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
-			.setProperty("hibernate.connection.username", "charaf@dar-mysql-server")
-			.setProperty("hibernate.connection.password", "Dar+2018")
+			.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/dar_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
+			.setProperty("hibernate.connection.username", "root")
+			.setProperty("hibernate.connection.password", "")
 			
 			.setProperty("hibernate.show_sql","true")
 			.setProperty("hibernate.format_sql", "true")
