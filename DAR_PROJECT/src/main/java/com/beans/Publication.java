@@ -91,7 +91,7 @@ public class Publication {
 	@ManyToMany(mappedBy="publications")
 	private Set<Abonne> abonnes;
 
-	@OneToMany(mappedBy="publication")
+	@OneToMany(mappedBy="publication", fetch = FetchType.EAGER)
 	private List<Commentaire> comments;
 
 	public List<Commentaire> getComments(){

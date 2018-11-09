@@ -29,19 +29,6 @@ public class ProfileDAO {
 	private ProfileDAO() {
 		
 	}
-	
-	// sebhan lah 
-			//-_-_
-			//au fait quand tu fais query.list tu commit et toi t'es en train de commit une deuxième fois 
-			// mais j'ai testé sans commit ça n'avait pas marché et toi t'as pas lancé le serveur pk ? 
-			//faut pas lancer le serveur je t'ai dis ça c'est une classe de test tu lance que ça
-			//du coup c'est pour ça ça archait pas
-			//normalement ça n'a rien a voir atend je ressaye -_-
-			// sebhan lah 
-			//mdrrr mytho -_- wllh j'ai testé sans commit hier xD
-			//xD ihechkoulen merci jesus -_-
-			//aller salut :D sahit beslama saha 
-	
 	public ArrayList<List> getAllPublications(String UserID) {
 		
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();

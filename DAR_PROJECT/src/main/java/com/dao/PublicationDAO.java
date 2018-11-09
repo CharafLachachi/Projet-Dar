@@ -3,8 +3,10 @@ package com.dao;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.beans.Abonne;
 import com.beans.AddressModel;
 import com.beans.CitiesOfInterest;
 import com.beans.HotelContactModel;
@@ -105,6 +107,30 @@ public abstract class PublicationDAO {
 			session.close();
 		}
 
+	}
+	
+	public static Publication getPublicationById(int id_pub) {
+		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+		Session session  = sessionFactory.getCurrentSession();
+		if (!session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		Transaction tx = null;
+		Publication pub = null;
+		try {
+			tx = session.getTransaction();
+			if(!tx.isActive()) 
+			tx.begin();
+			pub =( Publication) session.get(Publication.class, id_pub);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+		}
+		return pub;
 	}
 	
 }

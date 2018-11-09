@@ -24,11 +24,6 @@ public class DashboardDAO {
 		if (!session.isOpen()) {
 			session = sessionFactory.openSession();
 		}
-		//user id nest pas utilisé 
-		//werili la bd stp
-		//had le fichier est changé tu vx le sauvegarder
-		//c'est juste les commentaires oui okk
-		//oui juste pour le test je selectionne toutes les publications okk
 		Transaction tx = null;
 		List result = null;
 		try {

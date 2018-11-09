@@ -1,6 +1,20 @@
 package com.beans;
 
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 /**
@@ -10,18 +24,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table (name = "COMMENTAIRE")
-public class Commentaire {
+public class Commentaire  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "COMMENT_ID")
-	private int COMMENT_id;
+	private int comment_id;
 
 	@Column(name = "COMMENT_TXT")
-	private int COMMENT_text;
+	private String comment_text;
 
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created")
+    private Date created;
 	
-
+	
 	/** 
 	 * Association avec publication
 	 * @return
@@ -50,23 +68,36 @@ public class Commentaire {
 	public Abonne getAbonne() {
 		return this.abonne;
 	}
+
+	public int getComment_id() {
+		return comment_id;
+	}
+
+	public void setComment_id(int comment_id) {
+		this.comment_id = comment_id;
+	}
+
+	public String getComment_text() {
+		return comment_text;
+	}
+
+	public void setComment_text(String comment_text) {
+		this.comment_text = comment_text;
+	}
+
+	public void setAbonne(Abonne abonne) {
+		this.abonne = abonne;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 	
 	
 	
-	public int getCOMMENT_id() {
-		return COMMENT_id;
-	}
-
-	public void setCOMMENT_id(int cOMMENT_id) {
-		COMMENT_id = cOMMENT_id;
-	}
-
-	public int getCOMMENT_text() {
-		return COMMENT_text;
-	}
-
-	public void setCOMMENT_text(int cOMMENT_text) {
-		COMMENT_text = cOMMENT_text;
-	}
-
+	
 }
