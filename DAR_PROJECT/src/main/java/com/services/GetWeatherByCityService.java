@@ -15,7 +15,7 @@ public abstract class GetWeatherByCityService {
 		try {
 			response = TheWeatherApiAccess.GetResponseFromAPI(TheWeatherApiAccess.getDailyWeatherByCityName(cityName));
 			if (response != null) {
-				System.out.println(response.toString());
+				//System.out.println(response.toString());
 			} else System.out.println("response null");
 			Gson gson = new GsonBuilder().create();
 			JsonParser parser = new JsonParser();

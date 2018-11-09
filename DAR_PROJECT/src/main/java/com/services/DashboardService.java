@@ -48,7 +48,7 @@ public abstract class DashboardService {
 
 		String owner = publication.get("owner").getAsString();
 
-		System.out.println("publication "+publication);
+		//System.out.println("publication "+publication);
 
 		String userNameOwner = DashboardDAO.getOwnerUserName(owner);
 
@@ -56,6 +56,6 @@ public abstract class DashboardService {
 
 		publication.addProperty("userNameOwner", userNameOwner);
 
-		System.out.println("apres : "+publication);
+		//System.out.println("apres : "+publication);
 	}
 }

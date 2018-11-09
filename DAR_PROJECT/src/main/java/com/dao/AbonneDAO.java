@@ -1,5 +1,9 @@
 package com.dao;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,13 +12,18 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import com.beans.Abonne;
 import com.utils.HibernateUtility;
+import com.utils.PasswordHash;
+
 
 public abstract class AbonneDAO {
 
 	public AbonneDAO() {
 	}
 
-	public static void addAbonne(Abonne abonne) {
+	public static void addAbonne(Abonne abonne) {		
+		String hashPassword = PasswordHash.getEncodedPassword(abonne.getPassword());
+		abonne.setPassword(hashPassword);
+		
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
 		if (!session.isOpen()) {
@@ -31,7 +40,7 @@ public abstract class AbonneDAO {
 		if (tx.getStatus().equals(TransactionStatus.ACTIVE)) { 
 		    tx.commit();
 		}
-		System.out.println("n Abonne added \n");
+		//System.out.println("n Abonne added \n");
 
 	}
 	
@@ -86,6 +95,8 @@ public abstract class AbonneDAO {
 	}
 	
 	public static Abonne getAbonneByUserNameAndPassword(String username,String password) {
+		String hashPassword = PasswordHash.getEncodedPassword(password);
+		
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 		Session session  = sessionFactory.getCurrentSession();
 		if (!session.isOpen()) {
@@ -96,9 +107,10 @@ public abstract class AbonneDAO {
 		try {
 			tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("from Abonne a where a.username='" + username + "' and  a.password ='"+ password+ "'");
+			Query query = session.createQuery("from Abonne a where a.username='" + username + "' and  a.password ='"+ hashPassword+ "'");
 			abonne = (Abonne) query.uniqueResult();
-			tx.commit();
+			tx.commit();	
+			
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();

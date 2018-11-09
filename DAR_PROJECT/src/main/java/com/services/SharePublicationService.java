@@ -11,7 +11,7 @@ public abstract class SharePublicationService {
 		int ownerId = new Gson().fromJson(pubJson.toString(),JsonObject.class).getAsJsonObject().get("idUser").getAsInt();
 		
 		Publication pub = new Gson().fromJson(pubJson.toString(), Publication.class);
-		System.out.println(pub.toString());
+		//System.out.println(pub.toString());
 		pub.setOwner(ownerId);
 		PublicationDAO.addPublic(pub,ownerId);
 		return res;

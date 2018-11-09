@@ -39,7 +39,7 @@ public class SignService {
 			
 			abonne.setCities(citiesOfInterests);
 			AbonneDAO.addAbonne(abonne);
-			System.out.println("**************************************************"+abonne.toString());
+			//System.out.println("**************************************************"+abonne.toString());
 			abonne_json = new JsonObject();
 			abonne_json.addProperty("id_abonne", abonne.getABONNE_id());
 			abonne_json.addProperty("message", 200);
@@ -55,7 +55,7 @@ public class SignService {
 	public Abonne loginAbonne(String email, String password){
 		
 		// TODO replace by getAbonneByUsernameAndPassword
-		Abonne abonne = AbonneDAO.getAbonneByUserName(email);
+		Abonne abonne = AbonneDAO.getAbonneByUserNameAndPassword(email,password);
 		return abonne;
 	}
 }

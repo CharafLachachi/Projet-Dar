@@ -70,7 +70,7 @@ public class DashboardDAO {
 
 			ownerJO.addProperty("userNameOwner", userNameOwner);
 
-			System.out.println("userNameOwner : "+ ownerJO);
+			//System.out.println("userNameOwner : "+ ownerJO);
 			session.close();
 		} catch (Exception e) {
 			if (tx != null) {

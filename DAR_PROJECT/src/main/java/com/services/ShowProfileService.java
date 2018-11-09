@@ -92,7 +92,7 @@ public class ShowProfileService {
 			  posts = new String[res.get(1).size()];
 			 for(int i=0;i<res.get(1).size();i++) {
 				 posts[i] = mapper.writeValueAsString(res.get(1).get(i));
-				 System.out.println(posts[i]);
+				 //System.out.println(posts[i]);
 			 }
 		
 		} catch (JsonProcessingException e) {

@@ -26,7 +26,7 @@ public class JoinServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
-		System.out.println(jb.toString());
+	//	System.out.println(jb.toString());
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
 		

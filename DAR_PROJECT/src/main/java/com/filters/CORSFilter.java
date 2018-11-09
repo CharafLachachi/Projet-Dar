@@ -21,7 +21,7 @@ public class CORSFilter implements Filter {
      */
     public CORSFilter() {
         // TODO Auto-generated constructor stub
-    	System.out.println("cors");
+    	//System.out.println("cors");
     }
  
     /**

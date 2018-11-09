@@ -42,11 +42,9 @@ public class Publication {
 
 	@Column(name = "OWNER")
 	private int owner;
-
-	//kayen 2 colonnes makich t recuprihiom hagda ? 
-	//mechi deux clones deux lignes il me recupere que deux lignes 
-	///j/e te montre ?
-	//vas y 
+	
+	@Column(name = "PICTURE_URL")
+	private String picture;
 	
 	//y aura d'autres attributs 
 	@Column(name = "ROOMPRICE")
@@ -217,5 +215,14 @@ public class Publication {
 	public void setComments(List<Commentaire> comments) {
 		this.comments = comments;
 	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	
 	
 }

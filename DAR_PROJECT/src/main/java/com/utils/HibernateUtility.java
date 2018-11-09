@@ -55,8 +55,8 @@ public class HibernateUtility {
 			.setProperty("hibernate.connection.username", "root")
 			.setProperty("hibernate.connection.password", "")
 			
-			.setProperty("hibernate.show_sql","true")
-			.setProperty("hibernate.format_sql", "true")
+			.setProperty("hibernate.show_sql","false")
+			.setProperty("hibernate.format_sql", "false")
 			.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect")
 			.setProperty("hibernate.hbm2ddl.auto","update")
 			.setProperty("hibernate.current_session_context_class", "thread")

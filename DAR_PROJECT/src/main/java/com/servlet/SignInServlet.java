@@ -70,13 +70,20 @@ public class SignInServlet extends HttpServlet {
 		Abonne abonne = SignService.loginAbonne(loginObject.getEmail(), loginObject.getPassword());
 
 		JsonObject created_abonne_response_json = new JsonObject();
-		System.err.println(abonne);
-		String token = getJWT_Token(abonne.getUsername(), abonne.getABONNE_id(),
-				abonne.getFirstname(), abonne.getEmail(), abonne.getLastname());
-		created_abonne_response_json.addProperty("token", token);
-		response.setContentType("application/json;charset=utf-8");
-		System.out.println(token);
-		response.getWriter().print(created_abonne_response_json);
+		if (abonne != null) {
+			System.err.println(abonne);
+			String token = getJWT_Token(abonne.getUsername(), abonne.getABONNE_id(), abonne.getFirstname(),
+					abonne.getEmail(), abonne.getLastname());
+			created_abonne_response_json.addProperty("token", token);
+			response.setContentType("application/json;charset=utf-8");
+			System.out.println(token);
+			response.getWriter().print(created_abonne_response_json);
+		}
+		else {
+			created_abonne_response_json.addProperty("error", "bad password or username");
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.getWriter().print(created_abonne_response_json);
+		}
 	}
 
 	public String getJWT_Token(String username, int userId, String firstName, String email, String lastName) {

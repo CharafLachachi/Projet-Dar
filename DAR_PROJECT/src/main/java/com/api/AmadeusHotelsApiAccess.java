@@ -1,9 +1,6 @@
 package com.api;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.logging.Logger;
 
 import com.amadeus.Amadeus;
 import com.amadeus.Params;
@@ -12,10 +9,13 @@ import com.amadeus.resources.HotelOffer;
 
 public abstract class AmadeusHotelsApiAccess {
 	public static final String API_KEY = "UAGApAXeJN2K4Exq2GsKwDDGwxnIYGxT";
+	private final static Logger LOGGER = Logger.getLogger(AmadeusHotelsApiAccess.class.getName());
 	public static final 	Amadeus amadeus = Amadeus
             .builder("YhkwZHS3fGykKY95hO4xX1SEF9NGL18u", "74EAgWWFpZt9ZcFm")
+            .setLogger(LOGGER)
+            .setLogLevel("debug")
             .build();
-
+	
 		public static HotelOffer[] getHotelOffers(String checkin, String checkout, Integer radius,Integer maxPrice, String latitude, String longitude ) {
 //			return "http://api.sandbox.amadeus.com/v1.2/hotels/search-circle"
 //					+ "?latitude="+latitude

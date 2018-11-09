@@ -62,9 +62,9 @@ public class UploadProfilePictureServlet extends HttpServlet {
     	//response.getWriter().append("Served at: ").append(request.getContextPath());
     */	
 		
-		System.out.println("Upload Pic request");
+		//System.out.println("Upload Pic request");
 		String user_id = request.getParameter("user_id");
-		System.out.println("User id : "+user_id);
+		//System.out.println("User id : "+user_id);
 		
 		InputStream is = request.getInputStream();
 		OutputStream os = response.getOutputStream();
@@ -83,7 +83,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
 		byte[] my_image = ShowProfileService.getProfilePicture(user_id);
         os.write(my_image);
 		os.flush();
-        System.out.println("done writing file");
+       // System.out.println("done writing file");
     
 	}
 

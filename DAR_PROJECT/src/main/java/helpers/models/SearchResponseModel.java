@@ -16,6 +16,7 @@ public class SearchResponseModel {
 	private String city;
 	private String hotelName;
 	private HotelContactModel hotelContacts;
+	private String currency;
 	
 	public SearchResponseModel() {}
 
@@ -105,6 +106,14 @@ public class SearchResponseModel {
 
 	public void setHotelContacts(HotelContactModel hotelContacts) {
 		this.hotelContacts = hotelContacts;
+	}
+	
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	@Override

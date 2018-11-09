@@ -27,7 +27,7 @@ public abstract class CitiesOfInterestDAO {
 			e.printStackTrace();
 		}
 		tx.commit();
-		System.out.println("n city added \n");
+		//System.out.println("n city added \n");
 
 	}
 	
