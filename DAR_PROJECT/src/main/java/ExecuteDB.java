@@ -33,8 +33,16 @@ public class ExecuteDB {
 //
 //		System.out.println(searchObject.getCities().toString());
 //		String hoteslOffersResponse = searchHotelService.getHotels(searchObject);
-		UnsplashApiAccess api = new UnsplashApiAccess();
-		System.out.println(		api.getImage());
+//		UnsplashApiAccess api = new UnsplashApiAccess();
+//		System.out.println(		api.getImage());
+		
+		try {
+			String res = DashboardService.getDashBoardPublicationsByUserId("1"/*userId*/);
+			System.out.println(res);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

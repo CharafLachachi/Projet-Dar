@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table (name = "ABONNE")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Abonne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -202,7 +202,8 @@ public class Abonne {
 				+ lastname + ", gender=" + gender + ", adress=" + adress + ", description=" + description
 				+ ", password=" + password + "]";
 	}
-
+	
+	@JsonIgnore
 	public Set<CitiesOfInterest> getCities() {
 		return cities;
 	}
@@ -219,7 +220,7 @@ public class Abonne {
 	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
-
+	@JsonIgnore
 	public void setComments(List<Commentaire> comments) {
 		this.comments = comments;
 	}

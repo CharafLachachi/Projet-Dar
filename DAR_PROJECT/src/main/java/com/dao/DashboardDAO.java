@@ -13,7 +13,7 @@ import com.beans.Publication;
 import com.google.gson.JsonObject;
 import com.utils.HibernateUtility;
 
-public class DashboardDAO {
+public abstract class DashboardDAO {
 
 	public DashboardDAO() {
 	}

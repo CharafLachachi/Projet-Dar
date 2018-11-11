@@ -88,7 +88,7 @@ public class Publication {
 	private AddressModel address;
 	
 	
-	@ManyToMany(mappedBy="publications")
+	@ManyToMany(mappedBy="publications", fetch = FetchType.EAGER)
 	private Set<Abonne> abonnes;
 
 	@OneToMany(mappedBy="publication", fetch = FetchType.EAGER)
