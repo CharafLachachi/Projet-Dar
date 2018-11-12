@@ -11,6 +11,7 @@ import com.beans.Publication;
 import com.dao.ProfileDAO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.utils.HibernateUtility;
 
 public class ShowProfileService {
@@ -110,6 +111,61 @@ public class ShowProfileService {
 		return "["+own_publications+","+publications_of_interest+"]";
 	}
 	
+	public static String GetPersonnalPosts(String UserID) {
+		
+		List res = profile_dao.GetPersonnalPosts(UserID); 
+		ObjectMapper mapper = new ObjectMapper();
+		String[] posts = null;
+		
+		try {
+			
+			 posts = new String[res.size()];
+			 for(int i=0;i<res.size();i++) {
+				 posts[i] = mapper.writeValueAsString(res.get(i));
+			 }
+		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		String own_publications = "[";
+		for(int i=0;i<posts.length;i++) {
+			own_publications += posts[i];
+			if(i<posts.length-1) own_publications  +=",";
+		}
+		own_publications  += "]";
+		
+		return own_publications; 
+		
+	}
+
+	public static String GetPostsOfInterst(String UserID) {
+		
+		List res = profile_dao.GetPostsOfInterst(UserID);
+		ObjectMapper mapper = new ObjectMapper();
+		String[] posts = null;
+		
+		try {
+			
+			 posts = new String[res.size()];
+			 for(int i=0;i<res.size();i++) {
+				 posts[i] = mapper.writeValueAsString(res.get(i));
+			 }
+		
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		String posts_of_interest = "[";
+		for(int i=0;i<posts.length;i++) {
+			posts_of_interest += posts[i];
+			if(i<posts.length-1) posts_of_interest  +=",";
+		}
+		posts_of_interest  += "]";
+		
+		return posts_of_interest; 
+		
+	}
 	
 	public static byte[] getProfilePicture(String user_id) {
 		
@@ -124,4 +180,14 @@ public class ShowProfileService {
 		return profile_dao.uploadProfilePicture(User_id, image);
 		
 	}
+	
+	public static String updateProfileInfos(JsonObject json) {
+		
+		
+		return profile_dao.updateProfileInfos(json);  
+		
+	}
+	
+	
+	
 }
