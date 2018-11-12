@@ -11,7 +11,6 @@ import com.google.gson.JsonObject;
 public abstract class DashboardService {
 
 	public static String getDashBoardPublicationsByUserId(String userID) {
-
 		List<Publication> list = DashboardDAO.getPublications(userID);
 
 		ObjectMapper mapper = new ObjectMapper();

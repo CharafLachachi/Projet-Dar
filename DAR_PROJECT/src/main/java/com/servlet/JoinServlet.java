@@ -25,11 +25,13 @@ public class JoinServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("hello");
 		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 	//	System.out.println(jb.toString());
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
 		
+		System.out.println("json : "+jsonObject);
 		int PublicationId = Integer.parseInt(jsonObject.get("pubid").getAsString());
 		int userId = Integer.parseInt(jsonObject.get("userid").getAsString());
 		
