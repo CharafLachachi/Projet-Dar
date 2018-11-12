@@ -1,23 +1,17 @@
 package com.servlet;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.result.internal.OutputsImpl;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Base64;
-import java.lang.Object;
-import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -69,14 +63,13 @@ public class UploadProfilePictureServlet extends HttpServlet {
         os.flush();
         System.out.println("done writing file");
     	//response.getWriter().append("Served at: ").append(request.getContextPath());
-    */	//philippe tribuché
-		
+    */	
 		InputStream  is ;
 		OutputStream os ;
 		
-		System.out.println("Upload Pic request");
+		//System.out.println("Upload Pic request");
 		String user_id = request.getParameter("user_id");
-		System.out.println("User id : "+user_id);
+		//System.out.println("User id : "+user_id);
 		
 		if(user_id == null) {
 			
@@ -87,8 +80,8 @@ public class UploadProfilePictureServlet extends HttpServlet {
 			user_id = jsonObject.get("user_id").getAsString();
 			
 			String img = jsonObject.get("image").getAsString();
-			//byte[] img_ = android.util.Base64.decode(img, 0);
-		    byte[] img_ = Base64.getDecoder().decode(img); 
+			byte[] img_ = android.util.Base64.decode(img, 0);
+			// byte[] img_ = Base64.getDecoder().decode(img); 
 			ShowProfileService.uploadProfilePicture(user_id, img_);
 			byte[] my_image = ShowProfileService.getProfilePicture(user_id);
 			os = response.getOutputStream();
@@ -114,7 +107,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
 		byte[] my_image = ShowProfileService.getProfilePicture(user_id);
         os.write(my_image);
 		os.flush();
-        System.out.println("done writing file");
+        //System.out.println("done writing file");
     
 	}
 

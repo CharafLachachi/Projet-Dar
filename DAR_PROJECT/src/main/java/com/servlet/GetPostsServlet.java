@@ -1,7 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,41 +9,44 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.services.JoinService;
+import com.services.ShowProfileService;
 import com.utils.PasrseJsonUtility;
 
-@WebServlet("/join")
-public class JoinServlet extends HttpServlet{
-
+/**
+ * Servlet implementation class GetPostsServlet
+ */
+@WebServlet("/GetPosts")
+public class GetPostsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	public JoinServlet() {
-		super();
-	}
-	
-	@Override
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public GetPostsServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("hello");
 		StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
-	//	System.out.println(jb.toString());
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(jb.toString(), JsonObject.class);
+		String userId = jsonObject.get("userid").getAsString();
+		String Posts_type = jsonObject.get("Posts_type").getAsString();
 		
-		System.out.println("json : "+jsonObject);
-		int PublicationId = Integer.parseInt(jsonObject.get("pubid").getAsString());
-		int userId = Integer.parseInt(jsonObject.get("userid").getAsString());
-		
-		boolean r = JoinService.joinPublicationByIds(PublicationId, userId);
-		
-		JsonObject res = new JsonObject();
-		res.addProperty("result", true);
+		String res = Posts_type.equals("Own") ? ShowProfileService.GetPersonnalPosts(userId) : ShowProfileService.GetPostsOfInterst(userId);
 		response.getWriter().println(res);
-		
 	}
-	
-	@Override
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
 	}
 
