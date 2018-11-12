@@ -6,6 +6,7 @@ public class SignupModel extends LoginModel{
 	private String firstname;
 	private String username;
 	private String[] cities;
+	private String image;
 	
 	public SignupModel() {
 		super();
@@ -40,6 +41,14 @@ public class SignupModel extends LoginModel{
 	public String toString() {
 		return "SignupModel [firstname=" + firstname + ", username=" + username + ", cities=" + Arrays.toString(cities)
 				+ super.toString()+ "]";
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	

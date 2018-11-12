@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.services.ShowProfileService;
 import com.services.SignService;
 import com.utils.PasrseJsonUtility;
 
@@ -23,7 +25,8 @@ import helpers.models.SignupModel;
  * 
  * @author Lachachi charaf
  */
-@WebServlet("/SignUp")
+@WebServlet(name = "signup", urlPatterns = { "/SignUp" })
+
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected SignService SignService;
@@ -55,18 +58,26 @@ public class SignUpServlet extends HttpServlet {
 		 StringBuffer jb = PasrseJsonUtility.getRequestJson(request);
 		  
 		  System.out.println("Json      "+jb.toString());
-		  
+		 // Actually used only in android
+		  JsonObject resp = new Gson().fromJson(jb.toString(), JsonObject.class); 
+		 
+		 
 		  SignupModel SignUpObject = (new Gson().fromJson(jb.toString(), SignupModel.class));
 		  
 		  System.err.println(SignUpObject.toString());
+		  
+		 
 		JsonObject created_abonne_response_json = SignService.createAbonne(
 				SignUpObject.getUsername(),
 				SignUpObject.getFirstname(),
 				SignUpObject.getFirstname(), 
 				SignUpObject.getEmail(),
 				SignUpObject.getPassword(),
-				SignUpObject.getCities());
+				SignUpObject.getCities(),
+				SignUpObject.getImage());
 
+	
+		 
 		created_abonne_response_json.addProperty("message", 200);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=utf-8");
