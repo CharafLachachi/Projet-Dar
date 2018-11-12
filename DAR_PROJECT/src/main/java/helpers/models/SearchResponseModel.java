@@ -17,6 +17,7 @@ public class SearchResponseModel {
 	private String hotelName;
 	private HotelContactModel hotelContacts;
 	private String currency;
+	private String pub_id;
 	
 	public SearchResponseModel() {}
 
@@ -122,6 +123,18 @@ public class SearchResponseModel {
 				+ ", chekInDate=" + chekInDate + ", checkOutDate=" + checkOutDate + ", address=" + address
 				+ ", weather=" + weather + ", picture=" + picture + ", city=" + city + ", hotelName=" + hotelName
 				+ ", hotelContacts=" + hotelContacts + "]";
+	}
+
+	public String getPub_id() {
+		return pub_id;
+	}
+
+	public void setPub_id(String pub_id) {
+		this.pub_id = pub_id;
+	}
+
+	public String getRoomPrice() {
+		return roomPrice;
 	}
 
 	
