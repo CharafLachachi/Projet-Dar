@@ -19,6 +19,7 @@ import com.beans.CitiesOfInterest;
 import com.beans.Publication;
 import com.google.gson.JsonObject;
 import com.utils.HibernateUtility;
+import com.utils.PasswordHash;
 
 public class ProfileDAO {
 
@@ -308,9 +309,10 @@ public String updateProfileInfos(JsonObject json) {
 			  a.setLastname(json.get("lastname").getAsString());
 			  a.setUsername(json.get("username").getAsString());
 			  String pass = null ; 
-			  if( ( pass = json.get("password").getAsString()).length()  >= 5)
-			  a.setPassword(pass);
-			 
+			  if( ( pass = json.get("password").getAsString()).length()  >= 5) {
+				  String hashPassword = PasswordHash.getEncodedPassword(pass);
+				  a.setPassword(hashPassword);
+			  }
 			  Query query = session.createQuery("FROM Abonne a WHERE a.email='" + json.get("email").getAsString() + "'");
 			  List l = query.list();
 			  if(l.size() == 0)

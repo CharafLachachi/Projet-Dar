@@ -73,7 +73,7 @@ public class SignUpServlet extends HttpServlet {
 				SignUpObject.getFirstname(), 
 				SignUpObject.getEmail(),
 				SignUpObject.getPassword(),
-				SignUpObject.getCities(),
+				SignUpObject.getCities() == null ? new String[0] : SignUpObject.getCities(),
 				SignUpObject.getImage());
 
 	
