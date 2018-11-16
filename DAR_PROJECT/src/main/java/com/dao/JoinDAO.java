@@ -25,13 +25,13 @@ public class JoinDAO {
 			tx = session.getTransaction();
 			tx.begin();
 			
-			String sql1 = "UPDATE PUBLICATION SET nbPers=nbPers+1 WHERE pub_id="+PublicationId;
-			Query query1 = session.createSQLQuery(sql1);
-			int res1 = query1.executeUpdate();
+//			String sql1 = "UPDATE PUBLICATION SET nbPers=nbPers+1 WHERE pub_id="+PublicationId;
+//			Query query1 = session.createSQLQuery(sql1);
+//			int res1 = query1.executeUpdate();
 			
 			String sql = "INSERT INTO AbonnePub VALUES("+userId+","+PublicationId+")";
 			Query query = session.createSQLQuery(sql);
-			int res = query1.executeUpdate();
+			int res = query.executeUpdate();
 
 			tx.commit();
 			

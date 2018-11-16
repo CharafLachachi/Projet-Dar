@@ -28,13 +28,14 @@ public abstract class DashboardDAO {
 		List result = null;
 		try {
 			tx = session.getTransaction();
-			tx.begin();
+			if (!tx.isActive()) {
+				tx.begin();
+			}
 			/**
 			 * SELECT * FROM Publication p WHERE p.pub_id in (SELECT pub_id FROM Abonne_cities WHERE id_user=User_id
 			 */
 			Query query = session.createQuery("from Publication p");
 			result = query.list();
-			
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
@@ -42,7 +43,7 @@ public abstract class DashboardDAO {
 			e.printStackTrace();
 		} finally {
 		}
-		session.close();
+
 		return result;
 	}
 
