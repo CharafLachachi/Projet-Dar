@@ -42,7 +42,7 @@ public abstract class PublicationDAO {
 		CitiesOfInterestDAO.userOfCity(AbonneDAO.getAbonneById(ownerId).getABONNE_id(), c.getCity_id());
 		}
 		if(c!=null)
-		pub.setCity(String.valueOf(c.getCity_id()));
+		pub.setCity(String.valueOf(c.getCity_name()));
 		
 
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
