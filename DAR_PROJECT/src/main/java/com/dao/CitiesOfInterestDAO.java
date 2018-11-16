@@ -65,7 +65,7 @@ public abstract class CitiesOfInterestDAO {
 			tx = session.getTransaction();
 			tx.begin();
 			Query query = session.createQuery("FROM CitiesOfInterest a WHERE a.city_name='" + name + "'");
-			city = (CitiesOfInterest) query.uniqueResult();
+			city = (CitiesOfInterest) query.getSingleResult();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
