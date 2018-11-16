@@ -19,8 +19,9 @@ import com.beans.CitiesOfInterest;
 import com.beans.Publication;
 import com.google.gson.JsonObject;
 import com.utils.HibernateUtility;
+import com.utils.PasswordHash;
 
-public class ProfileDAO {
+public class ProfileDAO /*Singleton*/ {
 
 	private static ProfileDAO p_dao = null ;
 
@@ -36,6 +37,7 @@ public class ProfileDAO {
 	private ProfileDAO() {
 		
 	}
+	
 	public ArrayList<List> getAllPublications(String UserID) {
 		
 		SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
@@ -110,18 +112,28 @@ public class ProfileDAO {
 		  tx = session.getTransaction();
 		  if (!tx.isActive())
 			  tx.begin();
-		  String hql = "delete from Publication where Pub_id='"+PublicationID+"'";
-		  Query query = session.createQuery(hql);
+		  
+		  String sql = "delete from AbonnePub where pub_id='"+PublicationID+"'";
+		  Query query = session.createSQLQuery(sql);
 		  res = query.executeUpdate();
+		  
+		  Publication p = (Publication) session.get(Publication.class,Integer.parseInt(PublicationID));
+		  session.remove(p);
+		  
+		 /* 
+		  String hql = "delete from Publication where Pub_id='"+PublicationID+"'";
+		  query = session.createQuery(hql);
+		  res = query.executeUpdate();
+		*/
 		  tx.commit();
 
 		} catch (Throwable t) {
 		  tx.rollback();
 		  t.printStackTrace();
-		  return -1;
+		  return 0;
 		}
 		
-		return res;
+		return 1;
 	}
 	
 	public int	DeletePublicationOfInterest(String UserID,String PublicationID) {
@@ -138,6 +150,7 @@ public class ProfileDAO {
 		  tx = session.getTransaction();
 		  if(!tx.isActive())
 			  tx.begin();
+
 		  String sql = "delete from AbonnePub where abo_id='"+UserID+"' and pub_id='"+PublicationID+"'";
 		  Query query = session.createSQLQuery(sql);
 		  res = query.executeUpdate();
@@ -308,9 +321,10 @@ public String updateProfileInfos(JsonObject json) {
 			  a.setLastname(json.get("lastname").getAsString());
 			  a.setUsername(json.get("username").getAsString());
 			  String pass = null ; 
-			  if( ( pass = json.get("password").getAsString()).length()  >= 5)
-			  a.setPassword(pass);
-			 
+			  if( ( pass = json.get("password").getAsString()).length()  >= 5) {
+				  String hashPassword = PasswordHash.getEncodedPassword(pass);
+				  a.setPassword(hashPassword);
+			  }
 			  Query query = session.createQuery("FROM Abonne a WHERE a.email='" + json.get("email").getAsString() + "'");
 			  List l = query.list();
 			  if(l.size() == 0)
@@ -392,7 +406,5 @@ public String updateProfileInfos(JsonObject json) {
 	
 	
 	
-	
-	
-	
+
 }
