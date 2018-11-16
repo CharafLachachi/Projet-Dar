@@ -50,7 +50,7 @@ public  class UnsplashApiAccess {
 			JsonArray results = json.get("results").getAsJsonArray();
 			for (JsonElement jsonElement : results) {
 			JsonObject element = jsonElement.getAsJsonObject();
-			imageUrls.enqueue(element.get("urls").getAsJsonObject().get("small").getAsString());
+			imageUrls.enqueue(element.get("urls").getAsJsonObject().get("raw").getAsString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

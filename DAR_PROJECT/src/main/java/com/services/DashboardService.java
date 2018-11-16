@@ -20,7 +20,7 @@ public abstract class DashboardService {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		System.out.println(jsonInString);
+		//System.out.println(jsonInString);
 		return jsonInString;
 	}
 

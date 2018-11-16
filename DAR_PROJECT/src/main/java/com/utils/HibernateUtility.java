@@ -53,7 +53,7 @@ public class HibernateUtility {
 			.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver")
 			.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/dar_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
 			.setProperty("hibernate.connection.username", "root")
-			.setProperty("hibernate.connection.password", "root")
+			.setProperty("hibernate.connection.password", "")
 			
 			.setProperty("hibernate.show_sql","false")
 			.setProperty("hibernate.format_sql", "false")

@@ -3,6 +3,7 @@ package com.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Hibernate;
 
 import com.beans.Abonne;
@@ -41,14 +42,22 @@ public abstract class CommentService {
 		Publication publication = PublicationDAO.getPublicationById(Integer.parseInt(id_pub));
 		 Hibernate.initialize(publication.getComments());
 		 List<Commentaire> comments = publication.getComments();
+		
+		 List<String> allreadyAddComment = new ArrayList<>();
+		
 		List<JsonObject> list = new ArrayList<>();
 		for (Commentaire commentaire : comments) {
+			// Used to avoid duplicated comment it's actually dirty way
+			if (allreadyAddComment.contains(commentaire.getCreated().toString())) continue;
+			allreadyAddComment.add(commentaire.getCreated().toString());			
 			JsonObject comment = new JsonObject();
 			comment.addProperty("comment_user_id", commentaire.getComment_id());
 			comment.addProperty("comment_user_name", commentaire.getAbonne().getFirstname() + " " + commentaire.getAbonne().getLastname());
 			comment.addProperty("comment_text", commentaire.getComment_text());
 			comment.addProperty("comment_id_pub", id_pub);
 			comment.addProperty("comment_created_date", commentaire.getCreated().toString());
+			String base64String = Base64.encodeBase64String(ShowProfileService.getProfilePicture(String.valueOf(commentaire.getAbonne().getABONNE_id())));		
+			comment.addProperty("comment_image_url", base64String);
 			list.add(comment);			
 		}
 		

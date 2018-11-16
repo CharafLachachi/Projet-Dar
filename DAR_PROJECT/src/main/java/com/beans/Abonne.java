@@ -225,7 +225,7 @@ public class Abonne {
 	public void setComments(List<Commentaire> comments) {
 		this.comments = comments;
 	}
-
+	@JsonIgnore
 	public byte[] getImage() {
 		return image;
 	}

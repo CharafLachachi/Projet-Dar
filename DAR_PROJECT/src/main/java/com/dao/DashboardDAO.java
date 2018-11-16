@@ -34,6 +34,7 @@ public abstract class DashboardDAO {
 			 */
 			Query query = session.createQuery("from Publication p");
 			result = query.list();
+			
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
@@ -41,7 +42,7 @@ public abstract class DashboardDAO {
 			e.printStackTrace();
 		} finally {
 		}
-
+		session.close();
 		return result;
 	}
 
