@@ -29,7 +29,9 @@ public abstract class AbonneDAO {
 		if (!session.isOpen()) {
 			session = sessionFactory.openSession();
 		}
-		Transaction tx = session.beginTransaction();
+		Transaction tx = session.getTransaction();
+		if(!tx.isActive())
+			tx.begin();
 	
 		try {
 			session.save(abonne);
@@ -79,7 +81,8 @@ public abstract class AbonneDAO {
 		Abonne abonne = null;
 		try {
 			tx = session.getTransaction();
-			tx.begin();
+			if(!tx.isActive())
+			 tx.begin();
 			Query query = session.createQuery("FROM Abonne a WHERE a.email='" + email + "'");
 			abonne = (Abonne) query.uniqueResult();
 			tx.commit();
@@ -106,7 +109,8 @@ public abstract class AbonneDAO {
 		Abonne abonne = null;
 		try {
 			tx = session.getTransaction();
-			tx.begin();
+			if(!tx.isActive())
+			 tx.begin();
 			Query query = session.createQuery("from Abonne a where a.username='" + username + "' and  a.password ='"+ hashPassword+ "'");
 			abonne = (Abonne) query.uniqueResult();
 			tx.commit();	

@@ -28,7 +28,8 @@ public abstract class DashboardDAO {
 		List result = null;
 		try {
 			tx = session.getTransaction();
-			tx.begin();
+			if(!tx.isActive())
+			 tx.begin();
 			/**
 			 * SELECT * FROM Publication p WHERE p.pub_id in (SELECT pub_id FROM Abonne_cities WHERE id_user=User_id
 			 */
@@ -58,7 +59,8 @@ public abstract class DashboardDAO {
 		Transaction tx = null;
 		try {
 			tx = session.getTransaction();
-			tx.begin();
+			if(!tx.isActive())
+			 tx.begin();
 			String userNameOwner;
 			Query query = session.createQuery("SELECT a.username FROM Abonne a WHERE a.ABONNE_id='" + owner + "'");
 			userNameOwner = query.uniqueResult().toString();
