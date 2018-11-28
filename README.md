@@ -32,6 +32,6 @@ et interagir avec eux sur une seule et même plateforme.
 <li> Tomcat 9 </li>
 </ul>
 
-## Auteur 
-[Charaf Lachachi](https://github.com/CharafLachachi)
+## Auteurs
+[Charaf Lachachi](https://github.com/CharafLachachi)</br>
 [Thamazgha Smail](https://github.com/ThamazghaSMAIL)
