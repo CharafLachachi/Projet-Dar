@@ -4,6 +4,10 @@
 Le plus beau voyage est celui qu’on a pas encore fait" Loick Peyron. Vous préparez un voyage et vous voulez partager cette expérience avec une ou plusieurs autres personnes mordues de voyages ? Rejoindre "VoyageonsEnsemble" c’est organiser des voyages, rejoindre les voyages d’autres voyageurs
 et interagir avec eux sur une seule et même plateforme.
 
+## Partie Front-end
+[Front-end Angular](https://github.com/CharafLachachi/Projet_Dar_Angular)
+
+
 ## Fonctionnalités de la plateforme
 <ul>
 <li> Consulter les voyages de vos villes d’intérêt </li>
